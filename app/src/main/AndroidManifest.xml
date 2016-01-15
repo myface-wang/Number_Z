@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="cn.bmob.otaku.number_z">
+
+    <permission android:protectionLevel="normal" android:name="cn.bmob.permission.push"/>
+    <uses-permission android:name="cn.bmob.permission.push"/><!-- 添加自定义的权限-->
+    <uses-permission android:name="android.permission.READ_LOGS" />//读取系统底层日志
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />//访问电话状态
+    <uses-permission android:name="android.permission.WAKE_LOCK" />//允许程序在手机屏幕关闭后后台进程仍然运行
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />//允许程序开机自动运行
+    <uses-permission android:name="android.permission.VIBRATE" />//允许振动
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />//获取当前WiFi接入的状态以及WLAN热点的信息
+    <uses-permission android:name="android.permission.RECEIVE_USER_PRESENT" />//用户唤醒机器的权限
+
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />//读写文件权限(这是写的权限，有了这个权限就不用写读的权限)
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />//获取网络信息状态，如当前的网络连接是否有效
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />//改变网络状态如是否能联网
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CAMERA"/>//照相机
+
+    <application
+        android:name=".activity.MyApplication"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme.NoActionBar">
+        <activity
+            android:name=".activity.MainActivity"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:launchMode="singleTask"
+            >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity android:name=".activity.LoginActivity"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:launchMode="singleTop"
+            />
+        <activity android:name=".activity.RegisterActivity"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:launchMode="singleTop"
+            />
+        <activity android:name=".activity.ForgetActivity"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:launchMode="singleTop"
+            />
+        <activity android:name=".activity.DetailsActivity"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:launchMode="singleTop"
+            />
+        <activity android:name=".activity.ImageActivity"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:launchMode="singleTop"
+            />
+        <activity android:name=".activity.AboutActivity"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:launchMode="singleTop"
+            />
+        <activity android:name=".activity.CollectionActivity"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:launchMode="singleTop"
+            />
+        <activity android:name=".activity.CommentsActivity"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:launchMode="singleTop"
+            />
+        <activity android:name=".activity.CodeActivity"
+            android:launchMode="singleTop"
+            />
+        <activity android:name=".window.CodeChooseMeActivity"
+            android:theme="@style/MyDialogActivity"
+            android:launchMode="singleTop"
+            />
+        <activity android:name=".window.CodeInputActivity"
+            android:theme="@style/MyDialogActivity"
+            android:launchMode="singleTop"
+            android:windowSoftInputMode="adjustResize"
+            />
+        <activity android:name=".window.CameraActivity"
+            android:theme="@style/MyDialogActivity"
+            android:launchMode="singleTop"
+            />
+        <activity android:name=".window.CodeChooseUsActivity"
+            android:theme="@style/MyDialogActivity"
+            android:launchMode="singleTop"
+            />
+        <activity android:name=".window.CodeTypeActivity"
+            android:theme="@style/MyDialogActivity"
+            android:launchMode="singleTop"
+            />
+        <activity android:name=".window.ReplyActivity"
+            android:theme="@style/MyDialogActivity"
+            android:launchMode="singleTop"
+            android:windowSoftInputMode="adjustResize"
+            />
+        <activity android:name=".activity.FeedbackActivity"
+            android:launchMode="singleTop"
+            />
+
+        <activity android:name=".activity.UserActivity"
+            android:launchMode="singleTop"
+            />
+        <activity android:name=".activity.SettingActivity"
+            android:launchMode="singleTop"
+            />
+
+        <service
+            android:label="PushService"
+            android:name="cn.bmob.push.lib.service.PushService"
+            android:process="cn.bmob.push"
+            android:permission="cn.bmob.permission.push"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="cn.bmob.push.lib.service.PushService"/>
+            </intent-filter>
+        </service>
+
+        <receiver android:name="cn.bmob.push.PushReceiver" >
+            <intent-filter android:priority="2147483647" ><!--优先级加最高-->
+                <!-- 系统启动完成后会调用 -->
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <!-- 解锁完成后会调用 -->
+                <action android:name="android.intent.action.USER_PRESENT" />
+                <!-- 监听网络连通性 -->
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+            </intent-filter>
+        </receiver>
+
+        <receiver android:name=".service.MyPushMessageReceiver">
+            <intent-filter>
+                <action android:name="cn.bmob.push.action.MESSAGE"/>
+            </intent-filter>
+        </receiver>
+
+        <service
+            android:name=".service.MyPushService"
+            android:label="@string/action_push"
+            android:enabled="true" >
+        </service>
+
+    </application>
+
+</manifest>

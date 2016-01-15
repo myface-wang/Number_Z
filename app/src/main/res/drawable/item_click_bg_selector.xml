@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- 没有焦点时的背景图片 -->
+    <item android:state_window_focused="false"
+        android:drawable="@color/white" />
+    <!-- 非触摸模式下获得焦点并单击时的背景图片 -->
+    <item android:state_focused="true" android:state_pressed="true"   android:drawable= "@color/gray" />
+    <!-- 触摸模式下单击时的背景图片-->
+    <item android:state_focused="false" android:state_pressed="true"   android:drawable="@color/gray" />
+    <!--选中时的图片背景-->
+    <item android:state_selected="true"   android:drawable="@color/gray" />
+    <!--获得焦点时的图片背景-->
+    <item android:state_focused="true"   android:drawable="@color/gray" />
+
+    <!-- 默认时的背景图片,不能写在最前面！！
+    注意：安卓程序在读取这个文件时，只会读取符合当前控件状态的第一个Item的内容。
+    如果在selector下的第一个item中没有标注以上任何一个状态，那么它表示使用任何状态，
+    将会在空间每次状态变化时只读取这个item的内容。所以，这样的默认的配置，
+    一般都会置于最下面的item中。
+    -->
+    <item android:drawable="@color/white" />
+</selector>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_index"
+            android:icon="@drawable/ic_menu_camera"
+            android:title="主页"
+            android:checked="true"
+            />
+    </group>
+
+
+    <item
+        android:id="@+id/nav_collection"
+        android:icon="@drawable/ic_menu_gallery"
+        android:title="我的收藏" />
+    <item
+        android:id="@+id/nav_code"
+        android:icon="@drawable/ic_menu_slideshow"
+        android:title="代码仓库" />
+    <item
+        android:id="@+id/nav_feedback"
+        android:icon="@drawable/ic_menu_manage"
+        android:title="建议反馈" />
+
+
+    <item android:title="帮助">
+        <menu>
+            <item
+                android:id="@+id/nav_share"
+                android:icon="@drawable/ic_menu_share"
+                android:title="安利给朋友" />
+            <item
+                android:id="@+id/nav_us"
+                android:icon="@drawable/ic_menu_send"
+                android:title="关于我们" />
+        </menu>
+    </item>
+
+</menu>
