@@ -5,6 +5,7 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <string name="action_push">消息</string>
+    <string name="action_update">编辑</string>
 
     <string name="action_forget">忘记密码~ </string>
     <string name="code_add">添加</string>

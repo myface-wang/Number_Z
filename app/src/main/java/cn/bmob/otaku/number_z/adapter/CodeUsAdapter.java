@@ -78,7 +78,11 @@ public class CodeUsAdapter extends BaseAdapter{
             holder = (ViewHolder) convertView.getTag();
         }
 
-        x.image().bind(holder.img, codeBeans.get(position).getUser().getImage().getFileUrl(context),myApplication.getOpt());
+        if (codeBeans.get(position).getUser().getImage()!=null)
+        {
+            x.image().bind(holder.img, codeBeans.get(position).getUser().getImage().getFileUrl(context),myApplication.getOpt());
+        }
+
         holder.title.setText(codeBeans.get(position).getTitle());
         holder.content.setText(codeBeans.get(position).getCode());
 
@@ -191,7 +195,6 @@ public class CodeUsAdapter extends BaseAdapter{
             public void onSuccess(List<MyUser> object) {
                 // TODO Auto-generated method stub
                 zan.setText(object.size() + "");
-
             }
 
             @Override

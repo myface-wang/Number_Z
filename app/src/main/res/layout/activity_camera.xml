@@ -95,6 +95,8 @@
                     android:layout_height="wrap_content"
                     android:text="取消"
                     style="@style/window"
+                    android:clickable="true"
+                    android:background="@drawable/item_click_bg_selector"
                     />
 
             </LinearLayout>

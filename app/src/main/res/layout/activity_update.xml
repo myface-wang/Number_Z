@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context=".activity.UserActivity"
+    tools:context=".activity.UpdateActivity"
     android:background="@color/Serenity"
     >
 
@@ -17,7 +17,7 @@
         >
 
         <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar_user"
+            android:id="@+id/toolbar_update"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             >
@@ -48,6 +48,7 @@
                 android:orientation="horizontal"
                 android:gravity="center"
                 android:clickable="true"
+                android:background="@drawable/item_click_bg_selector"
                 >
 
                 <TextView
@@ -91,17 +92,20 @@
                     >
 
                     <TextView
-                        android:layout_weight="1"
-                        android:layout_width="0dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="昵称"
                         />
 
-                    <TextView
+                    <EditText
+                        android:layout_marginLeft="50dp"
+                        android:layout_weight="1"
                         android:id="@+id/tv_username"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="N/A"
+                        android:background="@null"
+                        android:textColor="@color/black"
+                        android:textSize="14sp"
                         />
 
                 </LinearLayout>
@@ -126,74 +130,37 @@
                     >
 
                     <TextView
-                        android:layout_weight="1"
-                        android:layout_width="0dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="邮箱"
                         />
 
-                    <TextView
+                    <EditText
+                        android:layout_marginLeft="50dp"
+                        android:layout_weight="1"
                         android:id="@+id/tv_email"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="N/A"
+                        android:background="@null"
+                        android:textColor="@color/black"
+                        android:textSize="14sp"
                         />
 
                 </LinearLayout>
             </LinearLayout>
         </android.support.v7.widget.CardView>
 
-        <android.support.v7.widget.CardView
+
+        <Button
+            android:layout_marginTop="20dp"
+            android:id="@+id/btn_update"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            >
-
-            <LinearLayout
-                android:id="@+id/ll_password"
-                android:layout_width="match_parent"
-                android:layout_height="58dp"
-                android:padding="10dp"
-                android:orientation="horizontal"
-                android:gravity="center"
-                android:clickable="true"
-                android:background="@drawable/item_click_bg_selector"
-                >
-
-                <TextView
-                    android:layout_weight="1"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:text="修改密码"
-                    />
-
-                <ImageView
-                    android:padding="5dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/right"
-                    />
-
-            </LinearLayout>
-        </android.support.v7.widget.CardView>
-
-        <android.support.v7.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="58dp"
-            android:layout_marginTop="20dp"
-            >
-
-            <TextView
-                android:id="@+id/logout"
-                android:gravity="center"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@drawable/item_click_bg_selector"
-                android:clickable="true"
-                android:text="退出登录"
-                />
-
-        </android.support.v7.widget.CardView>
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:text="保存"
+            android:background="@drawable/btn_click_bg_selector"
+            />
 
     </LinearLayout>
 

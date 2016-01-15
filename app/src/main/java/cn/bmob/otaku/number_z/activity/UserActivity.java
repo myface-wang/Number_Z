@@ -3,17 +3,18 @@ package cn.bmob.otaku.number_z.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.xutils.x;
 
 import cn.bmob.otaku.number_z.Bean.MyUser;
 import cn.bmob.otaku.number_z.R;
 import cn.bmob.otaku.number_z.view.CircleImageView;
-import cn.bmob.otaku.number_z.window.CameraActivity;
 import cn.bmob.v3.BmobUser;
 
 /**
@@ -30,7 +31,7 @@ public class UserActivity extends BaseActivity implements View.OnClickListener{
     private Toolbar toolbar;
     private TextView logout,tv_username,tv_email;
 
-    private LinearLayout ll_headimage,ll_name,ll_email;
+    private LinearLayout ll_headimage,ll_name,ll_email,ll_password;
     private CircleImageView image_head;
     private MyApplication myApplication;
 
@@ -53,25 +54,19 @@ public class UserActivity extends BaseActivity implements View.OnClickListener{
 
     private void initview() {
 
-        MyUser myUser=BmobUser.getCurrentUser(this, MyUser.class);
-
         logout= (TextView) findViewById(R.id.logout);
         ll_headimage= (LinearLayout) findViewById(R.id.ll_headimage);
         ll_name= (LinearLayout) findViewById(R.id.ll_name);
         ll_email= (LinearLayout) findViewById(R.id.ll_email);
+        ll_password= (LinearLayout) findViewById(R.id.ll_password);
         image_head= (CircleImageView) findViewById(R.id.image_head);
         tv_username= (TextView) findViewById(R.id.tv_username);
         tv_email= (TextView) findViewById(R.id.tv_email);
-        if (myUser.getImage()!=null)
-        {
-            x.image().bind(image_head,myUser.getImage().getFileUrl(this),myApplication.getOpt());
-        }
-        tv_username.setText(myUser.getUsername());
-        tv_email.setText(myUser.getEmail());
         ll_email.setOnClickListener(this);
         ll_headimage.setOnClickListener(this);
         ll_name.setOnClickListener(this);
         logout.setOnClickListener(this);
+        ll_password.setOnClickListener(this);
 
     }
 
@@ -85,9 +80,20 @@ public class UserActivity extends BaseActivity implements View.OnClickListener{
 
             finish();
             return true;
+        }else if (id==R.id.action_update)
+        {
+            Intent intent=new Intent(this,UpdateActivity.class);
+            startActivity(intent);
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        getMenuInflater().inflate(R.menu.update, menu);
+        return true;
     }
 
     @Override
@@ -101,15 +107,17 @@ public class UserActivity extends BaseActivity implements View.OnClickListener{
 
             case R.id.ll_email:
 
-
                 break;
             case R.id.ll_headimage:
 
-                Intent intent=new Intent(this, CameraActivity.class);
-                startActivityForResult(intent, 1);
                 break;
             case R.id.ll_name:
 
+                break;
+            case R.id.ll_password:
+                Intent intent=new Intent(this,ForgetActivity.class);
+                startActivity(intent);
+                Toast.makeText(this,"为了您账号的安全考虑，目前仅支持邮箱修改密码！",Toast.LENGTH_SHORT).show();
                 break;
             default:
                 break;
@@ -118,14 +126,14 @@ public class UserActivity extends BaseActivity implements View.OnClickListener{
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-
-
-        if (data!=null)
-        {
-            x.image().bind(image_head, data.getExtras().getString("url"), myApplication.getOpt());
+    protected void onResume() {
+        super.onResume();
+        MyUser myUser=BmobUser.getCurrentUser(this, MyUser.class);
+        if (myUser.getImage()!=null){
+            x.image().bind(image_head,myUser.getImage().getFileUrl(this), myApplication.getOpt());
         }
-        super.onActivityResult(requestCode, resultCode, data);
+        tv_username.setText(myUser.getUsername());
+        tv_email.setText(myUser.getEmail());
     }
 
     //退出登录
