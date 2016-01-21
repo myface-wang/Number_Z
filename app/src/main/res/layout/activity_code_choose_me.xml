@@ -30,7 +30,7 @@
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="0.5dp"
-                android:background="#ffd0d0d0"
+                android:background="@color/line"
                 />
 
             <TextView
@@ -44,7 +44,7 @@
             <ImageView
             android:layout_width="match_parent"
             android:layout_height="0.5dp"
-            android:background="#ffd0d0d0"
+            android:background="@color/line"
             />
 
             <TextView
@@ -59,9 +59,8 @@
             <ImageView
                 android:id="@+id/img_down"
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="#ffd0d0d0"
-                android:visibility="gone"
+                android:layout_height="0.5dp"
+                android:background="@color/line"
                 />
 
             <TextView
@@ -71,7 +70,6 @@
                 style="@style/window"
                 android:text="下载"
                 android:background="@drawable/item_click_bg_selector"
-                android:visibility="gone"
                 />
 
         </LinearLayout>

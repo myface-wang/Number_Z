@@ -57,23 +57,24 @@ public class HomeAapter extends BaseAdapter{
             holder = new ViewHolder();
             holder.img= (ImageView) convertView.findViewById(R.id.comment_image);
             holder.textView= (TextView) convertView.findViewById(R.id.tv_comment);
+            holder.title= (TextView) convertView.findViewById(R.id.tv_title);
+            holder.time= (TextView) convertView.findViewById(R.id.ll_right);
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
 
-        x.image().bind(holder.img,commentBeans.get(position).getCover().getFileUrl(context));
+        x.image().bind(holder.img, commentBeans.get(position).getCover().getFileUrl(context));
 
-//        commentBeans.get(position).getImg().loadImage(context, holder.img);
-
-        Log.i("name", commentBeans.get(position).getName());
-
-        holder.textView.setText(ToDBC(commentBeans.get(position).getName()));
+        holder.title.setText(commentBeans.get(position).getName());
+        holder.textView.setText(ToDBC(commentBeans.get(position).getIntroduction()));
+        holder.time.setText(commentBeans.get(position).getCreatedAt().substring(0,10));
 
         return convertView;
     }
 
     public static String ToDBC(String input) {
+        Log.i("input",input);
         char[] c = input.toCharArray();
         for (int i = 0; i< c.length; i++) {
             if (c[i] == 12288) {
@@ -88,5 +89,7 @@ public class HomeAapter extends BaseAdapter{
     static class ViewHolder {
         private ImageView img;
         private TextView textView;
+        private TextView title;
+        private TextView time;
     }
 }

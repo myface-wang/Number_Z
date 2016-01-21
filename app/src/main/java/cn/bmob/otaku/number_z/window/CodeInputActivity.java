@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -36,6 +37,7 @@ public class CodeInputActivity extends Activity{
 
         Intent intent=getIntent();
         type=intent.getStringExtra("type");
+        Log.i("type", type);
 
         ll_outside= (LinearLayout) findViewById(R.id.ll_outside);
 
@@ -50,18 +52,21 @@ public class CodeInputActivity extends Activity{
         switch (type)
         {
             case "url":
-                type="1";
+                type="0";
+                Log.i("type",type);
                 break;
             case "yun":
-                type="2";
+                type="1";
                 ed_code.setText("http://yun.baidu.com/s/");
+                Log.i("type", type);
                 break;
             case "magnetic":
-                type="3";
+                type="2";
                 ed_code.setText("magnet:?xt=urn:btih:");
+                Log.i("type", type);
                 break;
             case "other":
-                type="4";
+//                type="3";
                 break;
             default:
                 break;

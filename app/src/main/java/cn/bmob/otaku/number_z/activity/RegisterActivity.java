@@ -1,5 +1,6 @@
 package cn.bmob.otaku.number_z.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -33,7 +34,7 @@ import cn.bmob.v3.listener.UpdateListener;
 /**
  * Created by Administrator on 2015/12/23.
  */
-public class RegisterActivity extends BaseActivity{
+public class RegisterActivity extends BaseActivity {
 
     private TextInputLayout et_email,et_username,et_password,et_password_next;
 
@@ -208,12 +209,13 @@ public class RegisterActivity extends BaseActivity{
             @Override
             public void onSuccess() {
                 // TODO Auto-generated method stub
-                login(email,password);
+                login(email, password);
             }
+
             @Override
             public void onFailure(int code, String msg) {
                 // TODO Auto-generated method stub
-                ErrorReport.RrrorCode(code,RegisterActivity.this);
+                ErrorReport.RrrorCode(code, RegisterActivity.this);
             }
         });
     }
@@ -227,7 +229,14 @@ public class RegisterActivity extends BaseActivity{
                 // TODO Auto-generated method stub
                 if (user != null) {
                     bind();
-                    LoginActivity.instance.finish();
+
+                    Intent intent = new Intent();
+                    intent.setClassName( getPackageName(), LoginActivity.class.getName());
+                    if (getPackageManager().resolveActivity(intent, 0) == null) {
+                        // 说明系统中不存在这个activity
+                    }else {
+                        LoginActivity.instance.finish();
+                    }
                     finish();
                     Toast.makeText(RegisterActivity.this, "登录成功", Toast.LENGTH_SHORT).show();
                 }

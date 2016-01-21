@@ -72,6 +72,7 @@ public class MyApplication extends Application {
         {
             options= new ImageOptions.Builder()
                     // 是否忽略GIF格式的图片
+                    .setSize(-1,-1)
                     .setIgnoreGif(false)
                             // 图片缩放模式
                     .setImageScaleType(ImageView.ScaleType.CENTER_CROP)
@@ -84,9 +85,10 @@ public class MyApplication extends Application {
         }else {
             options= new ImageOptions.Builder()
                     // 是否忽略GIF格式的图片
+                    .setFadeIn(true)
                     .setIgnoreGif(true)
                             // 图片缩放模式
-                    .setImageScaleType(ImageView.ScaleType.CENTER_CROP)
+//                    .setImageScaleType(ImageView.ScaleType.CENTER)
                             // 下载中显示的图片
                     .setLoadingDrawableId(R.mipmap.ic_launcher)
                             // 下载失败显示的图片

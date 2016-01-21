@@ -1,7 +1,9 @@
 package cn.bmob.otaku.number_z.adapter;
 
+import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.support.v4.view.PagerAdapter;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -10,6 +12,8 @@ import org.xutils.x;
 
 import java.util.ArrayList;
 
+import cn.bmob.otaku.number_z.Bean.BannerBean;
+import cn.bmob.otaku.number_z.activity.DetailsActivity;
 import cn.bmob.otaku.number_z.activity.MyApplication;
 
 /**
@@ -17,18 +21,20 @@ import cn.bmob.otaku.number_z.activity.MyApplication;
  */
 public class BannerAdapter extends PagerAdapter{
 
-    private ArrayList<String> image;
+    private ArrayList<BannerBean> bannerBeans;
     private MyApplication application=null;
+    private Context context;
 
-    public BannerAdapter(ArrayList<String> image,MyApplication application)
+    public BannerAdapter(ArrayList<BannerBean> bannerBeans,MyApplication application,Context context)
     {
-        this.image=image;
+        this.bannerBeans=bannerBeans;
         this.application=application;
+        this.context=context;
     }
 
     @Override
     public int getCount() {
-        return image.size();
+        return bannerBeans.size();
     }
 
     @Override
@@ -46,6 +52,7 @@ public class BannerAdapter extends PagerAdapter{
         return super.getItemPosition(object);
     }
 
+
     @Override
     public Object instantiateItem(ViewGroup container, int position) {
         View itemView = getView(container,position);
@@ -56,8 +63,7 @@ public class BannerAdapter extends PagerAdapter{
     public View getView(ViewGroup container, final int position) {
         ImageView view = new ImageView(container.getContext());
 
-
-        x.image().bind(view,image.get(position),application.getOpt());
+        x.image().bind(view,bannerBeans.get(position).getImage().getFileUrl(context),application.getOpt());
 
         view.setScaleType(ImageView.ScaleType.CENTER_CROP);
 
@@ -66,11 +72,19 @@ public class BannerAdapter extends PagerAdapter{
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.i("banner",image.get(position));
+                if (bannerBeans.get(position).isType()) {
+                    Intent intent = new Intent();
+                    Bundle bu = new Bundle();
+                    bu.putSerializable("commentBean", bannerBeans.get(position).getDetails());
+                    intent.putExtras(bu);
+                    intent.setClass(context, DetailsActivity.class);
+                    context.startActivity(intent);
+                }else {
+                    //跳转到特殊页面。专题资讯之类的
+                }
             }
         });
         return view;
     }
-
 
 }

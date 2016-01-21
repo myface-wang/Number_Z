@@ -63,8 +63,8 @@
                     android:layout_width="48dp"
                     android:layout_height="48dp"
                     android:scaleType="centerCrop"
-                    app:border_outside_color="@color/white"
-                    app:border_thickness="1.8dp"
+                    app:border_color="@color/white"
+                    app:border_width="1dp"
                     android:src="@drawable/head"
                     />
 

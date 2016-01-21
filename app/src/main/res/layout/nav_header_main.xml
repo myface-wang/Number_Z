@@ -15,6 +15,7 @@
         android:paddingTop="40dp"
         android:paddingRight="20dp"
         android:paddingLeft="20dp"
+        android:paddingBottom="10dp"
         android:clickable="true"
         >
 
@@ -38,23 +39,36 @@
 
         <TextView
             android:id="@+id/tv_name"
-            android:paddingLeft="10dp"
             android:layout_marginTop="20dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="18sp"
-            android:text="用户名"
+            android:text="立即登录"
+            android:textColor="@color/white"
             android:layout_below="@id/img_head"
+            android:gravity="center"
             />
 
         <TextView
             android:id="@+id/tv_createtime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="注册时间"
+            android:text="创建：0天"
             android:layout_below="@+id/tv_name"
-            android:paddingTop="10dp"
+            android:paddingTop="15dp"
+            android:textSize="12sp"
+            android:textColor="@color/white"
             />
 
+        <Button
+            android:id="@+id/btn_register"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_width="wrap_content"
+            android:layout_height="25dp"
+            android:text="立即注册"
+            android:background="@drawable/shape"
+            android:visibility="gone"
+            />
     </RelativeLayout>
 </LinearLayout>

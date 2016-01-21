@@ -34,11 +34,10 @@ public class CommentsAdapter extends BaseAdapter{
     private long time;
 
     public CommentsAdapter(Context context, ArrayList<CommentsBean> commentsBean){
-
         this.context=context;
         this.commentsBean=commentsBean;
         layoutInflater = LayoutInflater.from(context);
-
+        getTime();
     }
 
     @Override

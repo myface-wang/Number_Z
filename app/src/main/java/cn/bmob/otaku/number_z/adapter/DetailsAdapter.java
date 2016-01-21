@@ -3,7 +3,7 @@ package cn.bmob.otaku.number_z.adapter;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
-import android.os.Parcelable;
+import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,7 +15,7 @@ import org.xutils.common.Callback;
 import org.xutils.image.ImageOptions;
 import org.xutils.x;
 
-import java.util.ArrayList;
+import java.io.Serializable;
 import java.util.List;
 
 import cn.bmob.otaku.number_z.Bean.CommentBean;
@@ -121,9 +121,18 @@ public class DetailsAdapter extends RecyclerView.Adapter<DetailsAdapter.ViewHold
         holder.img.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+//                Intent intent = new Intent();
+//                intent.putExtra("id", position);
+//                intent.putParcelableArrayListExtra("list", (ArrayList<? extends Parcelable>) list);
+//                intent.setClass(context, ImageActivity.class);
+//                context.startActivity(intent);
+
                 Intent intent = new Intent();
-                intent.putExtra("id", position);
-                intent.putParcelableArrayListExtra("list", (ArrayList<? extends Parcelable>) list);
+                Bundle bu = new Bundle();
+                bu.putInt("id", position);
+                bu.putSerializable("list", (Serializable) list);
+                intent.putExtras(bu);
+//                intent.putParcelableArrayListExtra("list", (ArrayList<? extends Parcelable>) list);
                 intent.setClass(context, ImageActivity.class);
                 context.startActivity(intent);
             }

@@ -21,6 +21,7 @@
     <style name="Text_Title">
         <item name="android:textSize">16sp</item>   //文字大小
         <item name="android:textColor">@color/item</item>   //文字颜色
+        <item name="android:maxLines">1</item>
         <!--<item name="android:textStyle">bold</item>-->
         <!--<item name="android:paddingLeft">15dp</item>-->
         <!--<item name="android:background">@color/color_background</item>-->
@@ -29,9 +30,9 @@
     </style>
 
     <style name="Text_Content">
-        <item name="android:textSize">14sp</item>
+        <item name="android:textSize">12sp</item>
         <!--<item name="android:padding">15dp</item>-->
-        <!--<item name="android:background">#ee6</item>  //背景颜色-->
+        <item name="android:textColor">#acacac</item>  //背景颜色
     </style>
 
     <style name="Text_Annotation">

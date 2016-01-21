@@ -50,6 +50,8 @@ public class CodeChooseMeActivity extends Activity{
         flag=intent.getBooleanExtra("flag", true);
         type=intent.getIntExtra("type", 0);
 
+        Log.i("type",type+"");
+
         myApplication= (MyApplication) getApplication();
         myhandler= myApplication.getHandler();
 
@@ -59,25 +61,36 @@ public class CodeChooseMeActivity extends Activity{
         tv_down= (TextView) findViewById(R.id.tv_down);
         img_down= (ImageView) findViewById(R.id.img_down);
 
-        if (type==3)
+        if (type!=2)
         {
-            img_down.setVisibility(View.VISIBLE);
-            tv_down.setVisibility(View.VISIBLE);
+            tv_down.setText("在浏览器中打开");
         }
 
         tv_down.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                //遍历，获取磁力链的条数
-                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(code));
-                intent.addCategory("android.intent.category.DEFAULT");
-                try {
-                    startActivity(intent);
-                    finish();
-                }catch (Exception e)
+                if (type==2)
                 {
-                    Toast.makeText(CodeChooseMeActivity.this,"未找到可供下载的app",Toast.LENGTH_SHORT).show();
+                    //应该遍历，获取磁力链的条数
+                    Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(code));
+                    intent.addCategory("android.intent.category.DEFAULT");
+                    try {
+                        startActivity(intent);
+                        finish();
+                    }catch (Exception e)
+                    {
+                        Toast.makeText(CodeChooseMeActivity.this,"未找到可供下载的app",Toast.LENGTH_SHORT).show();
+                    }
+                }else {
+                    try{
+                        Uri uri = Uri.parse(code);
+                        Intent intent = new Intent(Intent.ACTION_VIEW,uri);
+                        startActivity(intent);
+                    }catch (Exception e)
+                    {
+                        Toast.makeText(CodeChooseMeActivity.this,"异常网址，请自行打开浏览器",Toast.LENGTH_SHORT).show();
+                    }
                 }
             }
         });

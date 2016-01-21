@@ -16,6 +16,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -25,10 +26,14 @@ import android.widget.Toast;
 import org.xutils.image.ImageOptions;
 import org.xutils.x;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+import cn.bmob.otaku.number_z.Bean.BannerBean;
 import cn.bmob.otaku.number_z.Bean.DetailsBean;
 import cn.bmob.otaku.number_z.Bean.MyUser;
 import cn.bmob.otaku.number_z.R;
@@ -52,12 +57,12 @@ public class MainActivity extends BaseActivity
     private LinearLayout drawerhead;//先获取navigationView的头部view才能正确找到里面的控件设置点击事件
 
     private RollPagerView mRollViewPager;
-    private ArrayList<String> image=new ArrayList<String>();
     private ListView list;
     private View banner;
     private SwipeRefreshLayout swipeLayout;
     private HomeAapter homeAapter;
     private ArrayList<DetailsBean> commentBeans=new ArrayList<DetailsBean>();
+    private ArrayList<BannerBean> bannerBeans=new ArrayList<BannerBean>();
     private  BannerAdapter bannerAdapter;
 
     private int page=5;
@@ -69,8 +74,10 @@ public class MainActivity extends BaseActivity
     private MyApplication myApplication=null;
     private MyUser userInfo;
     private TextView tv_name,tv_createtime;
+    private Button btn_register;
 
     private MenuItem item;
+    private long firstTime;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,13 +89,14 @@ public class MainActivity extends BaseActivity
         userInfo = BmobUser.getCurrentUser(this, MyUser.class);
         imageOptions = new ImageOptions.Builder()
                 // 是否忽略GIF格式的图片
+                .setSize(-1,-1)
                 .setIgnoreGif(false)
                         // 图片缩放模式
                 .setImageScaleType(ImageView.ScaleType.CENTER_CROP)
                         // 下载中显示的图片
-//                .setLoadingDrawableId(R.drawable.ic_launcher)
+                .setLoadingDrawableId(R.drawable.loadimg)
                         // 下载失败显示的图片
-//                .setFailureDrawableId(R.drawable.ic_launcher)
+                .setFailureDrawableId(R.drawable.loadimg)
                         // 得到ImageOptions对象
                 .build();
 
@@ -120,8 +128,64 @@ public class MainActivity extends BaseActivity
         toggle.syncState();
 
         initview();
+        loadbanner();
         refresh();
 
+    }
+
+    private void loadbanner() {
+        BmobQuery<BannerBean> Query = new BmobQuery<BannerBean>();
+        Query.order("-createdAt");
+        Query.include("details");
+        Query.findObjects(MainActivity.this, new FindListener<BannerBean>() {
+
+            @Override
+            public void onSuccess(List<BannerBean> list) {
+                bannerBeans.addAll(list);
+                bannerAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onError(int i, String s) {
+
+            }
+        });
+    }
+
+    private String timeout(String linktime){
+
+        long beginTime = 0;
+        long endTime = 0;
+
+        Date d = new Date();
+        SimpleDateFormat sft  = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        sft.format(d);
+
+//        SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        try {
+            beginTime= sft.parse(linktime).getTime();
+            endTime= sft.parse(sft.format(d)).getTime();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+
+        long betweenDays =endTime - beginTime;
+
+        long day=betweenDays/(24*60*60*1000);
+        long hour=(betweenDays/(60*60*1000)-day*24);
+        long min=((betweenDays/(60*1000))-day*24*60-hour*60);
+        long s=(betweenDays/1000-day*24*60*60-hour*60*60-min*60);
+
+        String date;
+        if (day>0)
+        {
+            date=day+"天";
+        }else {
+            date="0天";
+        }
+
+        return date;
     }
 
     private void inituser() {
@@ -130,7 +194,7 @@ public class MainActivity extends BaseActivity
         if (userInfo!=null)
         {
             tv_name.setText(userInfo.getUsername());
-            tv_createtime.setText(userInfo.getCreatedAt());
+            tv_createtime.setText("您注册了："+timeout(userInfo.getCreatedAt()));
             if (userInfo.getImage()!=null)
             {
                 x.image().bind(img_head, userInfo.getImage().getFileUrl(this), myApplication.getOpt());
@@ -138,8 +202,9 @@ public class MainActivity extends BaseActivity
             tv_createtime.setVisibility(View.VISIBLE);
         }else {
             tv_name.setText("游客");
-            tv_createtime.setVisibility(View.GONE);
-            img_head.setImageResource(R.drawable.head);
+            tv_createtime.setText("登录体验更多功能哟~");
+            img_head.setImageResource(R.drawable.wlop);
+            btn_register.setVisibility(View.VISIBLE);
         }
 
     }
@@ -154,16 +219,24 @@ public class MainActivity extends BaseActivity
         rightbtn= (ImageView) drawerhead.findViewById(R.id.rightbtn);
         tv_name= (TextView) drawerhead.findViewById(R.id.tv_name);
         tv_createtime= (TextView) drawerhead.findViewById(R.id.tv_createtime);
+        btn_register= (Button) drawerhead.findViewById(R.id.btn_register);
+
+        btn_register.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, RegisterActivity.class);
+                startActivity(intent);
+            }
+        });
 
         img_head.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (BmobUser.getCurrentUser(MainActivity.this, MyUser.class)==null)
-                {
+                if (BmobUser.getCurrentUser(MainActivity.this, MyUser.class) == null) {
                     Intent login = new Intent(MainActivity.this, LoginActivity.class);
                     startActivity(login);
-                }else {
-                    Intent user=new Intent(MainActivity.this,UserActivity.class);
+                } else {
+                    Intent user = new Intent(MainActivity.this, UserActivity.class);
                     startActivity(user);
                 }
             }
@@ -179,17 +252,12 @@ public class MainActivity extends BaseActivity
             }
         });
 
-
-        image.add(0, "https://33.media.tumblr.com/7d1cc263d9b8ad6a055d9cfd6c48c5e4/tumblr_nrxwhw5PHF1tq4of6o1_400.gif");
-        image.add(0, "http://d.hiphotos.baidu.com/zhidao/pic/item/0b55b319ebc4b745e0d0dac2cdfc1e178b821599.jpg");
-        image.add(0, "http://d.hiphotos.baidu.com/zhidao/pic/item/0b55b319ebc4b745e0d0dac2cdfc1e178b821599.jpg");
-
         list= (ListView) findViewById(R.id.list_main);
         banner = getLayoutInflater().inflate(R.layout.headview_banner, null);
 
         mRollViewPager= (RollPagerView) banner.findViewById(R.id.roll_view_pager);
         mRollViewPager.setAnimationDurtion(1000);
-        bannerAdapter=new BannerAdapter(image, myApplication);
+        bannerAdapter=new BannerAdapter(bannerBeans, myApplication,this);
         mRollViewPager.setAdapter(bannerAdapter);
 
         swipeLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_container);
@@ -242,8 +310,12 @@ public class MainActivity extends BaseActivity
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
                 if (position >= 1) {
+
                     Intent intent = new Intent();
-                    intent.putExtra("objectid", commentBeans.get(position - 1).getObjectId());//activity里的数据是数据源，在这取其实是一样的
+                    Bundle bu = new Bundle();
+                    bu.putSerializable("commentBean", commentBeans.get(position - 1));//activity里的数据是数据源，在这取其实是一样的
+                    intent.putExtras(bu);
+//                intent.putParcelableArrayListExtra("list", (ArrayList<? extends Parcelable>) list);
                     intent.setClass(MainActivity.this, DetailsActivity.class);
                     startActivity(intent);
                 }
@@ -261,17 +333,14 @@ public class MainActivity extends BaseActivity
         BmobQuery<DetailsBean> Query = new BmobQuery<DetailsBean>();
 
         Query.setLimit(endpage);
-        Query.addQueryKeys("objectId,name,cover");
         Query.order("-createdAt");
         Query.setMaxCacheAge(TimeUnit.DAYS.toMillis(7));//缓存7天
         //判断是否有缓存，该方法必须放在查询条件（如果有的话）都设置完之后再来调用才有效，就像这里一样。
         boolean isCache = Query.hasCachedResult(this, DetailsBean.class);
-        if(isCache){//此为举个例子，并不一定按这种方式来设置缓存策略
-            Query.setCachePolicy(BmobQuery.CachePolicy.CACHE_ELSE_NETWORK);    // 如果有缓存的话，则设置策略为CACHE_ELSE_NETWORK
-
+        if(isCache){
+            Query.setCachePolicy(BmobQuery.CachePolicy.CACHE_THEN_NETWORK);
         }else{
-            Query.setCachePolicy(BmobQuery.CachePolicy.NETWORK_ELSE_CACHE);    // 如果没有缓存的话，则设置策略为NETWORK_ELSE_CACHE
-
+            Query.setCachePolicy(BmobQuery.CachePolicy.NETWORK_ELSE_CACHE);
         }
         Query.findObjects(MainActivity.this, new FindListener<DetailsBean>() {
             @Override
@@ -311,12 +380,10 @@ public class MainActivity extends BaseActivity
         BmobQuery<DetailsBean> Query = new BmobQuery<DetailsBean>();
         Query.order("-createdAt");
         Query.setSkip(page);
-        Query.addQueryKeys("objectId,name,cover");
         Query.findObjects(MainActivity.this, new FindListener<DetailsBean>() {
             @Override
             public void onSuccess(List<DetailsBean> object) {
                 // TODO Auto-generated method stub
-
 //                commentBeans.clear();
                 commentBeans.addAll(object);
                 if (object.size()==endpage)
@@ -342,16 +409,6 @@ public class MainActivity extends BaseActivity
 
 
     @Override
-    public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
-        } else {
-            super.onBackPressed();
-        }
-    }
-
-    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 
 //        getMenuInflater().inflate(R.menu.main, menu);
@@ -371,8 +428,6 @@ public class MainActivity extends BaseActivity
 
         //noinspection SimplifiableIfStatement
         if (id == 0) {
-
-
 
             return true;
         }
@@ -432,8 +487,26 @@ public class MainActivity extends BaseActivity
     @Override
     protected void onResume() {
         super.onResume();
-
         inituser();
+    }
+
+
+    @Override
+    public void onBackPressed() {
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
+            drawer.closeDrawer(GravityCompat.START);
+        } else {
+            long secondTime = System.currentTimeMillis();
+            if (secondTime - firstTime > 2000) {
+
+                Snackbar sb = Snackbar.make(drawer, "再按一次退出", Snackbar.LENGTH_SHORT);
+                sb.getView().setBackgroundColor(getResources().getColor(R.color.pink));
+                sb.show();
+                firstTime = secondTime;
+            } else {
+                finish();
+            }
+        }
 
     }
 }

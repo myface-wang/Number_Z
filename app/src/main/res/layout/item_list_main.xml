@@ -2,7 +2,7 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
-    android:layout_height="80dp"
+    android:layout_height="match_parent"
     android:paddingLeft="10dp"
     android:paddingRight="10dp"
     style="@style/theme"
@@ -19,22 +19,58 @@
             android:background="@drawable/item_click_bg_selector"
             >
 
+            <TextView
+                android:layout_toLeftOf="@+id/ll_right"
+                android:id="@+id/tv_title"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:paddingTop="15dp"
+                android:paddingLeft="15dp"
+                android:paddingBottom="15dp"
+                android:gravity="center|left"
+                android:singleLine="true"
+                android:ellipsize="end"
+                style="@style/Text_Title"
+                />
+
+
+                <TextView
+                    android:id="@+id/ll_right"
+                    android:layout_alignParentRight="true"
+                    android:layout_width="100dp"
+                    android:layout_height="60dp"
+                    android:textSize="12sp"
+                    android:drawableLeft="@drawable/time"
+                    android:gravity="center"
+                    android:padding="10dp"
+                    />
+
+
             <ImageView
+                android:layout_marginRight="10dp"
+                android:paddingBottom="10dp"
+                android:layout_below="@+id/tv_title"
                 android:id="@+id/comment_image"
+                android:scaleType="centerCrop"
                 android:layout_width="80dp"
-                android:layout_height="80dp"
+                android:layout_height="70dp"
+                android:layout_alignParentRight="true"
                 />
 
             <TextView
+                android:layout_marginRight="10dp"
+                android:layout_below="@+id/tv_title"
                 android:id="@+id/tv_comment"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_toRightOf="@+id/comment_image"
-                android:textSize="20sp"
-                android:maxLines="2"
-                android:padding="10dp"
-                android:gravity="center_vertical"
-                style="@style/Text_Title"
+                android:layout_height="70dp"
+                android:layout_toLeftOf="@+id/comment_image"
+                android:maxLines="3"
+                android:ellipsize="end"
+                android:paddingLeft="20dp"
+                android:paddingRight="10dp"
+                android:paddingBottom="15dp"
+                android:gravity="center|left|top"
+                style="@style/Text_Content"
                 />
 
         </RelativeLayout>

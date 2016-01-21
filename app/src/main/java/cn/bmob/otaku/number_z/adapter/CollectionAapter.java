@@ -62,6 +62,7 @@ public class CollectionAapter extends BaseAdapter {
             holder = new ViewHolder();
             holder.img= (ImageView) convertView.findViewById(R.id.drawer_image);
             holder.textView= (TextView) convertView.findViewById(R.id.drawer_text);
+            holder.drawer_time= (TextView) convertView.findViewById(R.id.drawer_time);
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
@@ -71,6 +72,8 @@ public class CollectionAapter extends BaseAdapter {
 
 
         holder.textView.setText(ToDBC(commentBeans.get(position).getDetails().getName()));
+
+        holder.drawer_time.setText(commentBeans.get(position).getCreatedAt().substring(0,10));
 
         convertView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -127,6 +130,7 @@ public class CollectionAapter extends BaseAdapter {
     static class ViewHolder {
         private ImageView img;
         private TextView textView;
+        private TextView drawer_time;
     }
 
     /*

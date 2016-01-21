@@ -100,12 +100,13 @@ public class UpdateActivity extends BaseActivity{
             @Override
             public void onSuccess() {
                 // TODO Auto-generated method stub
-                Toast.makeText(UpdateActivity.this,"更新用户信息成功",Toast.LENGTH_SHORT).show();
+                Toast.makeText(UpdateActivity.this,"信息更新成功",Toast.LENGTH_SHORT).show();
+                finish();
             }
             @Override
             public void onFailure(int code, String msg) {
                 // TODO Auto-generated method stub
-                Toast.makeText(UpdateActivity.this,"更新用户信息失败",Toast.LENGTH_SHORT).show();
+                Toast.makeText(UpdateActivity.this,"信息更新失败",Toast.LENGTH_SHORT).show();
             }
         });
     }

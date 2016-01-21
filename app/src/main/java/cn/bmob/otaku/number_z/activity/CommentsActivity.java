@@ -1,9 +1,12 @@
 package cn.bmob.otaku.number_z.activity;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.Toolbar;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AbsListView;
@@ -47,10 +50,12 @@ public class CommentsActivity extends BaseActivity {
     private String value;
     private String title="N/A";
 
-    private int page=5;
-    private int endpage=5;//每次翻页取的个数
+    private int page=10;
+    private int endpage=10;//每次翻页取的个数
     private boolean flag=true;
     private boolean isLoading = false;
+
+    private boolean btn=true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,6 +94,34 @@ public class CommentsActivity extends BaseActivity {
         list= (ListView) findViewById(R.id.list_comments);
         et_comment= (EditText) findViewById(R.id.et_comment);
         pinglun= (Button) findViewById(R.id.pinglun);
+
+        et_comment.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                if (s.length()==0) {
+                    pinglun.setBackgroundResource(R.drawable.btnshape);
+                    pinglun.setTextColor(Color.parseColor("#e5e5e5e5"));
+                    btn=true;
+                }else if (btn)
+                {
+                    pinglun.setBackgroundResource(R.drawable.btn_bule);
+                    pinglun.setTextColor(Color.parseColor("#535353"));
+                    btn=false;
+                }
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
 
         pinglun.setOnClickListener(new View.OnClickListener() {
             @Override

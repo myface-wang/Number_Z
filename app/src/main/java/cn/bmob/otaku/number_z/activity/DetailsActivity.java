@@ -7,7 +7,6 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
@@ -32,7 +31,6 @@ import cn.bmob.v3.BmobUser;
 import cn.bmob.v3.datatype.BmobPointer;
 import cn.bmob.v3.listener.DeleteListener;
 import cn.bmob.v3.listener.FindListener;
-import cn.bmob.v3.listener.GetListener;
 import cn.bmob.v3.listener.SaveListener;
 
 /**
@@ -56,6 +54,7 @@ public class DetailsActivity extends BaseActivity implements View.OnClickListene
 
     private ImageView img_collection,image_comments;
     private TextView tv_comments,tv_title;
+    private DetailsBean detailsBean;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,7 +62,6 @@ public class DetailsActivity extends BaseActivity implements View.OnClickListene
         setContentView(R.layout.activity_details);
 
         toolbar = (Toolbar) findViewById(R.id.toolbar_details);
-//        toolbar.setTitle("N/A");
         setSupportActionBar(toolbar);
 
         getSupportActionBar().setHomeButtonEnabled(true);
@@ -73,20 +71,21 @@ public class DetailsActivity extends BaseActivity implements View.OnClickListene
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", new View.OnClickListener() {
+                Snackbar.make(view, "预期跳转到话题页面", Snackbar.LENGTH_LONG)
+                        .setAction("Go", new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
 
-                                Log.i("11", "11");
+                                //预期跳转到话题页面
+
                             }
                         }).show();
             }
         });
 
         Intent intent=getIntent();
-        value=intent.getStringExtra("objectid");
-
+        detailsBean= (DetailsBean) intent.getExtras().getSerializable("commentBean");
+        value=detailsBean.getObjectId();
         initview();
         loaddate();
 
@@ -126,33 +125,13 @@ public class DetailsActivity extends BaseActivity implements View.OnClickListene
         commentsSize();
         collectioned();
 
-        BmobQuery<DetailsBean> query = new BmobQuery<DetailsBean>();
-        query.getObject(this, value, new GetListener<DetailsBean>() {
+        tv_title.setText(detailsBean.getName());
+        x.image().bind(head_details_image, detailsBean.getHeadimg().getFileUrl(DetailsActivity.this));
+        commentBeanList.clear();
+        commentBeanList.addAll(detailsBean.getContent());
+        detailsAdapter.notifyDataSetChanged();
+        title=detailsBean.getName();
 
-            @Override
-            public void onSuccess(DetailsBean object) {
-
-                tv_title.setText(object.getName());
-                title=object.getName();
-
-
-//                head_details_title.setText(object.getName());
-//                head_details_time.setText(object.getCreatedAt());
-//                head_details_content.setText(object.getIntroduction());
-
-                x.image().bind(head_details_image, object.getHeadimg().getFileUrl(DetailsActivity.this));
-
-                commentBeanList.clear();
-                commentBeanList.addAll(object.getContent());
-                detailsAdapter.notifyDataSetChanged();
-
-            }
-
-            @Override
-            public void onFailure(int code, String arg0) {
-
-            }
-        });
     }
 
     private void commentsSize() {

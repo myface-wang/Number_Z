@@ -33,7 +33,7 @@ import cn.bmob.v3.listener.UploadFileListener;
 public class CameraActivity extends Activity implements View.OnClickListener{
 
     private LinearLayout LL_outside;
-    private TextView tv_photo,tv_camera,tv_cancel;
+    private TextView tv_photo,tv_camera;
 
     private String image;
     private static final int PHOTO_CARMERA = 1;
@@ -57,11 +57,9 @@ public class CameraActivity extends Activity implements View.OnClickListener{
         setContentView(R.layout.activity_camera);
 
         LL_outside= (LinearLayout) findViewById(R.id.LL_outside);
-        tv_cancel= (TextView) findViewById(R.id.tv_cancel);
         tv_photo= (TextView) findViewById(R.id.tv_photo);
         tv_camera= (TextView) findViewById(R.id.tv_camera);
         LL_outside.setOnClickListener(this);
-        tv_cancel.setOnClickListener(this);
         tv_photo.setOnClickListener(this);
         tv_camera.setOnClickListener(this);
     }
@@ -75,9 +73,6 @@ public class CameraActivity extends Activity implements View.OnClickListener{
                 break;
             case R.id.tv_camera:
                 startCamera();
-                break;
-            case R.id.tv_cancel:
-                finish();
                 break;
             case R.id.tv_photo:
                 startPick();

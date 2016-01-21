@@ -59,9 +59,9 @@
                     />
             </LinearLayout>
 
-            <LinearLayout
+            <RelativeLayout
                 android:id="@+id/right"
-                android:layout_width="wrap_content"
+                android:layout_width="80dp"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:orientation="vertical"
@@ -71,20 +71,40 @@
                     android:id="@+id/image_code_zan"
                     android:layout_width="48dp"
                     android:layout_height="48dp"
-                    android:src="@drawable/collection_no"
+                    android:src="@drawable/star"
                     android:padding="10dp"
+                    android:background="@drawable/item_click_bg_selector"
                     />
 
                 <TextView
+                    android:layout_toRightOf="@+id/image_code_zan"
                     android:id="@+id/tv_code_zan"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
+                    android:layout_height="48dp"
+                    android:gravity="center_vertical"
                     android:text="~"
                     />
 
+                <ImageView
+                    android:layout_below="@+id/image_code_zan"
+                    android:id="@+id/image_code_cai"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:padding="10dp"
+                    android:src="@drawable/cai"
+                    android:background="@drawable/item_click_bg_selector"
+                    />
+                <TextView
+                    android:layout_below="@+id/tv_code_zan"
+                    android:layout_toRightOf="@+id/image_code_cai"
+                    android:id="@+id/tv_code_cai"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:gravity="center_vertical"
+                    android:text="~"
+                    />
 
-            </LinearLayout>
+            </RelativeLayout>
         </RelativeLayout>
 
     </android.support.v7.widget.CardView>

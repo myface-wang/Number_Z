@@ -11,11 +11,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import cn.bmob.otaku.number_z.Bean.CodeBean;
-import cn.bmob.otaku.number_z.Bean.MyUser;
 import cn.bmob.otaku.number_z.R;
-import cn.bmob.v3.BmobQuery;
-import cn.bmob.v3.datatype.BmobPointer;
-import cn.bmob.v3.listener.CountListener;
 
 /**
  * Created by Administrator on 2015/12/27.
@@ -66,12 +62,12 @@ public class CodeMeAdapter extends BaseAdapter{
             holder = (ViewHolder) convertView.getTag();
         }
 
-        if (codeBeans.get(position).getType()==1)
+        if (codeBeans.get(position).getType()==0)
         {
            holder.img.setImageResource(R.drawable.head);
-        }else if (codeBeans.get(position).getType()==2){
+        }else if (codeBeans.get(position).getType()==1){
             holder.img.setImageResource(R.drawable.yun);
-        }else if (codeBeans.get(position).getType()==3){
+        }else if (codeBeans.get(position).getType()==2){
             holder.img.setImageResource(R.drawable.xunlei);
         }
 
@@ -83,7 +79,13 @@ public class CodeMeAdapter extends BaseAdapter{
             holder.image_code_share.setImageResource(R.drawable.share_no);
         }
 
-        size(codeBeans.get(position).getObjectId(),holder.tv_code_zan);
+        if (codeBeans.get(position).getStar()!=null){
+            holder.tv_code_zan.setText(codeBeans.get(position).getStar()+"");
+        }else {
+            holder.tv_code_zan.setText("0");
+        }
+
+
         holder.title.setText(codeBeans.get(position).getTitle());
         holder.content.setText(codeBeans.get(position).getCode());
 
@@ -97,29 +99,4 @@ public class CodeMeAdapter extends BaseAdapter{
         private ImageView image_code_share;
         private TextView tv_code_zan;
     }
-
-    private void size(String ObjId, final TextView share){
-
-        BmobQuery<MyUser> query = new BmobQuery<MyUser>();
-
-        CodeBean post = new CodeBean();
-        post.setObjectId(ObjId);
-
-        query.addWhereRelatedTo("zan", new BmobPointer(post));
-
-        query.count(context, MyUser.class, new CountListener() {
-            @Override
-            public void onSuccess(int count) {
-                // TODO Auto-generated method stub
-
-                share.setText(String.valueOf(count));
-            }
-            @Override
-            public void onFailure(int code, String msg) {
-                // TODO Auto-generated method stub
-
-            }
-        });
-    }
-
 }

@@ -1,5 +1,6 @@
 package cn.bmob.otaku.number_z.Bean;
 
+import java.io.Serializable;
 import java.util.List;
 
 import cn.bmob.v3.BmobObject;
@@ -8,7 +9,7 @@ import cn.bmob.v3.datatype.BmobFile;
 /**
  * Created by Administrator on 2015/11/4.
  */
-public class DetailsBean extends BmobObject{
+public class DetailsBean extends BmobObject implements Serializable{
 
     private List<CommentBean> content;
     private BmobFile cover;

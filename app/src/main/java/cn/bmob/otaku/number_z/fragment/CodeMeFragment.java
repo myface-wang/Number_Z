@@ -7,6 +7,7 @@ import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -58,7 +59,6 @@ public class CodeMeFragment extends Fragment{
 
         application= (MyApplication) getActivity().getApplication();
 
-
         handler=new Myhandler();
 
         final ListView list_code= (ListView) view.findViewById(R.id.list_code);
@@ -92,6 +92,7 @@ public class CodeMeFragment extends Fragment{
                 startActivity(intent);
                 codeidposition = position;
 
+                Log.i("position",position+"+"+codeBeans.get(position).getType());
             }
         });
 

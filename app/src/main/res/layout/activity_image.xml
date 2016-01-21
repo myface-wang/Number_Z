@@ -44,12 +44,13 @@
             android:id="@+id/page_frameLayout"
             android:layout_alignParentBottom="true"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="64dp"
             android:background="#50000000"
+            android:clickable="false"
             >
 
             <RelativeLayout
-                android:gravity="center_vertical"
+                android:gravity="center"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 >
@@ -64,17 +65,35 @@
                     android:textColor="@color/white"
                     />
 
-                <ImageView
+
+                <TextView
                     android:id="@+id/load_image"
                     android:layout_alignParentRight="true"
                     android:layout_marginRight="30dp"
                     android:gravity="center_vertical"
                     android:padding="8dp"
-                    android:layout_width="40dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:src="@drawable/download"
+                    android:text="下载图片"
+                    android:textSize="12sp"
+                    android:textColor="@color/white"
+                    android:drawableTop="@drawable/down"
                     />
 
+
+                <TextView
+                    android:id="@+id/tv_wall"
+                    android:padding="8dp"
+                    android:layout_toLeftOf="@+id/load_image"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:text="设为墙纸"
+                    android:textSize="12sp"
+                    android:layout_marginRight="10dp"
+                    android:textColor="@color/white"
+                    android:drawableTop="@drawable/wall"
+                    />
             </RelativeLayout>
 
 

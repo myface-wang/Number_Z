@@ -3,7 +3,6 @@ package cn.bmob.otaku.number_z.Bean;
 import java.io.Serializable;
 
 import cn.bmob.v3.BmobObject;
-import cn.bmob.v3.datatype.BmobRelation;
 
 /**
  * Created by Administrator on 2015/12/27.
@@ -14,9 +13,26 @@ public class CodeBean extends BmobObject implements Serializable{
     private String code;
     private int type;
     private MyUser user;
-    private BmobRelation zan;
     private Boolean share;
     private String password;
+    private Integer star;
+    private Integer cai;
+
+    public Integer getCai() {
+        return cai;
+    }
+
+    public void setCai(Integer cai) {
+        this.cai = cai;
+    }
+
+    public Integer getStar() {
+        return star;
+    }
+
+    public void setStar(Integer star) {
+        this.star = star;
+    }
 
     public String getPassword() {
         return password;
@@ -32,14 +48,6 @@ public class CodeBean extends BmobObject implements Serializable{
 
     public void setShare(Boolean share) {
         this.share = share;
-    }
-
-    public BmobRelation getZan() {
-        return zan;
-    }
-
-    public void setZan(BmobRelation zan) {
-        this.zan = zan;
     }
 
     public MyUser getUser() {
