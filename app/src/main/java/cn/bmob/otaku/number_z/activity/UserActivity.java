@@ -14,6 +14,7 @@ import org.xutils.x;
 
 import cn.bmob.otaku.number_z.Bean.MyUser;
 import cn.bmob.otaku.number_z.R;
+import cn.bmob.otaku.number_z.utils.BaseDate;
 import cn.bmob.otaku.number_z.view.CircleImageView;
 import cn.bmob.v3.BmobUser;
 
@@ -33,14 +34,12 @@ public class UserActivity extends BaseActivity implements View.OnClickListener{
 
     private LinearLayout ll_headimage,ll_name,ll_email,ll_password;
     private CircleImageView image_head;
-    private MyApplication myApplication;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_user);
-        myApplication= (MyApplication) getApplication();
         toolbar = (Toolbar) findViewById(R.id.toolbar_user);
         toolbar.setTitle("个人中心");
         setSupportActionBar(toolbar);
@@ -130,7 +129,7 @@ public class UserActivity extends BaseActivity implements View.OnClickListener{
         super.onResume();
         MyUser myUser=BmobUser.getCurrentUser(this, MyUser.class);
         if (myUser.getImage()!=null){
-            x.image().bind(image_head,myUser.getImage().getFileUrl(this), myApplication.getOpt());
+            x.image().bind(image_head,myUser.getImage().getFileUrl(this), BaseDate.Head_OPTIONS());
         }
         tv_username.setText(myUser.getUsername());
         tv_email.setText(myUser.getEmail());

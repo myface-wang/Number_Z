@@ -64,7 +64,7 @@ public class CodeMeAdapter extends BaseAdapter{
 
         if (codeBeans.get(position).getType()==0)
         {
-           holder.img.setImageResource(R.drawable.head);
+           holder.img.setImageResource(R.drawable.ie);
         }else if (codeBeans.get(position).getType()==1){
             holder.img.setImageResource(R.drawable.yun);
         }else if (codeBeans.get(position).getType()==2){

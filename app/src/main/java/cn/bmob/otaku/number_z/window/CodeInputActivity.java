@@ -15,6 +15,7 @@ import cn.bmob.otaku.number_z.Bean.CodeBean;
 import cn.bmob.otaku.number_z.Bean.MyUser;
 import cn.bmob.otaku.number_z.R;
 import cn.bmob.otaku.number_z.utils.ErrorReport;
+import cn.bmob.otaku.number_z.utils.NoDoubleClickListener;
 import cn.bmob.v3.BmobUser;
 import cn.bmob.v3.listener.SaveListener;
 
@@ -86,7 +87,6 @@ public class CodeInputActivity extends Activity{
             public void onClick(View v) {
                 check();
             }
-
         });
 
         tv_cancel.setOnClickListener(new View.OnClickListener() {
@@ -96,10 +96,9 @@ public class CodeInputActivity extends Activity{
             }
         });
 
-        tv_determine.setOnClickListener(new View.OnClickListener() {
+        tv_determine.setOnClickListener(new NoDoubleClickListener() {
             @Override
-            public void onClick(View v) {
-
+            public void onNoDoubleClick(View view) {
                 String title=ed_title.getText().toString();
                 String code=ed_code.getText().toString();
                 String password=ed_password.getText().toString();

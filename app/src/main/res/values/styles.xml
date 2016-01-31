@@ -30,7 +30,7 @@
     </style>
 
     <style name="Text_Content">
-        <item name="android:textSize">12sp</item>
+        <item name="android:textSize">14sp</item>
         <!--<item name="android:padding">15dp</item>-->
         <item name="android:textColor">#acacac</item>  //背景颜色
     </style>

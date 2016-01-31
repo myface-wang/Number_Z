@@ -18,17 +18,13 @@
             android:background="@drawable/item_click_bg_selector"
             >
 
-            <cn.bmob.otaku.number_z.view.CircleImageView
+            <ImageView
                 android:id="@+id/image_code_me"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="10dp"
+                android:paddingLeft="5dp"
+                android:paddingTop="5dp"
                 android:layout_width="65dp"
                 android:layout_height="65dp"
                 android:scaleType="centerCrop"
-                app:border_width="1.5dp"
-                app:border_color="@color/white"
-                android:src="@drawable/head"
                 />
 
             <LinearLayout

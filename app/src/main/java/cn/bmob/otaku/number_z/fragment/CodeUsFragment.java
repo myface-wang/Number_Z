@@ -19,6 +19,7 @@ import cn.bmob.otaku.number_z.Bean.CodeBean;
 import cn.bmob.otaku.number_z.R;
 import cn.bmob.otaku.number_z.adapter.CodeUsAdapter;
 import cn.bmob.otaku.number_z.utils.ErrorReport;
+import cn.bmob.otaku.number_z.utils.NoDoubleItemClickListener;
 import cn.bmob.otaku.number_z.window.CodeChooseUsActivity;
 import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.listener.FindListener;
@@ -63,9 +64,9 @@ public class CodeUsFragment extends Fragment {
 
         codeUsAdapter=new CodeUsAdapter(codeBeans,getActivity(),list_code);
 
-        list_code.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        list_code.setOnItemClickListener(new NoDoubleItemClickListener(){
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            public void onNoDoubleItemClick(AdapterView<?> parent, View view, int position, long id) {
 
                 Intent intent = new Intent(getActivity(), CodeChooseUsActivity.class);
                 Bundle bundle = new Bundle();
@@ -77,7 +78,6 @@ public class CodeUsFragment extends Fragment {
         });
 
         list_code.setAdapter(codeUsAdapter);
-
 
         list_code.setOnScrollListener(new AbsListView.OnScrollListener() {
             @Override

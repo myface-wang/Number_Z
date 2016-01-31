@@ -23,8 +23,8 @@
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"
-                android:layout_width="65dp"
-                android:layout_height="65dp"
+                android:layout_width="54dp"
+                android:layout_height="54dp"
                 android:scaleType="centerCrop"
                 app:border_width="1.5dp"
                 app:border_color="@color/white"
@@ -47,6 +47,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:maxLines="1"
+                    android:ellipsize="end"
                     style="@style/Text_Title"
                     />
 
@@ -81,7 +82,7 @@
                     android:id="@+id/tv_code_zan"
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
-                    android:gravity="center_vertical"
+                    android:gravity="center"
                     android:text="~"
                     />
 
@@ -100,7 +101,7 @@
                     android:id="@+id/tv_code_cai"
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
-                    android:gravity="center_vertical"
+                    android:gravity="center"
                     android:text="~"
                     />
 

@@ -17,7 +17,8 @@ import java.util.ArrayList;
 import cn.bmob.otaku.number_z.Bean.CodeBean;
 import cn.bmob.otaku.number_z.Bean.MyUser;
 import cn.bmob.otaku.number_z.R;
-import cn.bmob.otaku.number_z.activity.MyApplication;
+import cn.bmob.otaku.number_z.utils.BaseDate;
+import cn.bmob.otaku.number_z.utils.NoDoubleClickListener;
 import cn.bmob.v3.BmobUser;
 import cn.bmob.v3.listener.UpdateListener;
 
@@ -29,7 +30,6 @@ public class CodeUsAdapter extends BaseAdapter{
     private ArrayList<CodeBean> codeBeans=new ArrayList<>();
     private Context context;
     private LayoutInflater layoutInflater;
-    private MyApplication myApplication;
 
     private ListView list_code;
 
@@ -39,7 +39,6 @@ public class CodeUsAdapter extends BaseAdapter{
         this.context=context;
         this.list_code=list_code;
         layoutInflater= LayoutInflater.from(context);
-        myApplication= (MyApplication) context.getApplicationContext();
     }
 
     @Override
@@ -78,7 +77,9 @@ public class CodeUsAdapter extends BaseAdapter{
 
         if (codeBeans.get(position).getUser().getImage()!=null)
         {
-            x.image().bind(holder.img, codeBeans.get(position).getUser().getImage().getFileUrl(context),myApplication.getOpt());
+            x.image().bind(holder.img, codeBeans.get(position).getUser().getImage().getFileUrl(context), BaseDate.Head_OPTIONS());
+        }else {
+            holder.img.setImageResource(R.drawable.head);
         }
 
         holder.title.setText(codeBeans.get(position).getTitle());
@@ -98,9 +99,10 @@ public class CodeUsAdapter extends BaseAdapter{
 
 //        praise(codeBeans.get(position).getObjectId(),holder.image_code_zan);
 
-        holder.image_code_cai.setOnClickListener(new View.OnClickListener() {
+        holder.image_code_cai.setOnClickListener(new NoDoubleClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onNoDoubleClick(View view) {
+//                super.onNoDoubleClick(view);
                 if (BmobUser.getCurrentUser(context, MyUser.class)!=null)
                 {
                     cai(codeBeans.get(position).getObjectId(), holder.tv_code_cai);
@@ -110,15 +112,13 @@ public class CodeUsAdapter extends BaseAdapter{
             }
         });
 
-        holder.image_code_zan.setOnClickListener(new View.OnClickListener() {
+        holder.image_code_zan.setOnClickListener(new NoDoubleClickListener() {
             @Override
-            public void onClick(View v) {
-
-                if (BmobUser.getCurrentUser(context, MyUser.class)!=null)
-                {
-                    zan(codeBeans.get(position).getObjectId(),holder.tv_code_zan);
-                }else {
-                    Toast.makeText(context,"请登录后进行操作！",Toast.LENGTH_SHORT).show();
+            public void onNoDoubleClick(View view) {
+                if (BmobUser.getCurrentUser(context, MyUser.class) != null) {
+                    zan(codeBeans.get(position).getObjectId(), holder.tv_code_zan);
+                } else {
+                    Toast.makeText(context, "请登录后进行操作！", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -191,7 +191,6 @@ public class CodeUsAdapter extends BaseAdapter{
         }
 
     }
-
 
 //    private void praise(String ObjId, final ImageView img){
 //

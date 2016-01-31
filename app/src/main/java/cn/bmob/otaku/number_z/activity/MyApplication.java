@@ -11,7 +11,6 @@ import org.xutils.image.ImageOptions;
 import org.xutils.x;
 
 import cn.bmob.otaku.number_z.BuildConfig;
-import cn.bmob.otaku.number_z.R;
 import cn.bmob.otaku.number_z.fragment.CodeMeFragment.Myhandler;
 import cn.bmob.otaku.number_z.service.MyPushService;
 import cn.bmob.otaku.number_z.utils.BaseDate;
@@ -77,9 +76,9 @@ public class MyApplication extends Application {
                             // 图片缩放模式
                     .setImageScaleType(ImageView.ScaleType.CENTER_CROP)
                             // 下载中显示的图片
-                    .setLoadingDrawableId(R.mipmap.ic_launcher)
+//                    .setLoadingDrawableId(R.mipmap.ic_launcher)
                             // 下载失败显示的图片
-                    .setFailureDrawableId(R.mipmap.ic_launcher)
+//                    .setFailureDrawableId(R.mipmap.ic_launcher)
                             // 得到ImageOptions对象
                     .build();
         }else {
@@ -90,9 +89,9 @@ public class MyApplication extends Application {
                             // 图片缩放模式
 //                    .setImageScaleType(ImageView.ScaleType.CENTER)
                             // 下载中显示的图片
-                    .setLoadingDrawableId(R.mipmap.ic_launcher)
+//                    .setLoadingDrawableId(R.mipmap.ic_launcher)
                             // 下载失败显示的图片
-                    .setFailureDrawableId(R.mipmap.ic_launcher)
+//                    .setFailureDrawableId(R.mipmap.ic_launcher)
                             // 得到ImageOptions对象
                     .build();
         }

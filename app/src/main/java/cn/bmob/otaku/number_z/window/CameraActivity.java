@@ -149,7 +149,7 @@ public class CameraActivity extends Activity implements View.OnClickListener{
         Bundle bundle = data.getExtras();
         if (null != bundle) {
             final Bitmap bmp = bundle.getParcelable("data");
-            saveCropPic(bmp);
+//            saveCropPic(bmp);
             Uri uri=Uri.parse(MediaStore.Images.Media.insertImage(getContentResolver(), bmp, null, null));
             String patch;
             patch=UrlUtils.getImageAbsolutePath(this, uri);
@@ -204,16 +204,17 @@ public class CameraActivity extends Activity implements View.OnClickListener{
             @Override
             public void onFailure(int code, String msg) {
                 // TODO Auto-generated method stub
-                Toast.makeText(CameraActivity.this, "修改失败", Toast.LENGTH_SHORT).show();
+                Toast.makeText(CameraActivity.this, code+"修改失败", Toast.LENGTH_SHORT).show();
             }
         });
     }
 
     private void image(final BmobFile bmobFile){
 
-        MyUser myUser = BmobUser.getCurrentUser(this, MyUser.class);
+        BmobUser bmobUser = BmobUser.getCurrentUser(this);
+        MyUser myUser = new MyUser();
         myUser.setImage(bmobFile);
-        myUser.update(this, myUser.getObjectId(), new UpdateListener() {
+        myUser.update(this, bmobUser.getObjectId(), new UpdateListener() {
 
             @Override
             public void onSuccess() {
@@ -230,7 +231,7 @@ public class CameraActivity extends Activity implements View.OnClickListener{
             @Override
             public void onFailure(int code, String msg) {
                 // TODO Auto-generated method stub
-                Toast.makeText(CameraActivity.this, "修改失败", Toast.LENGTH_SHORT).show();
+                Toast.makeText(CameraActivity.this, code+"修改失败", Toast.LENGTH_SHORT).show();
             }
         });
 

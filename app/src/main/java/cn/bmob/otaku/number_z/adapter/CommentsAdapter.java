@@ -9,7 +9,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import org.xutils.image.ImageOptions;
 import org.xutils.x;
 
 import java.text.ParseException;
@@ -18,6 +17,7 @@ import java.util.ArrayList;
 
 import cn.bmob.otaku.number_z.Bean.CommentsBean;
 import cn.bmob.otaku.number_z.R;
+import cn.bmob.otaku.number_z.utils.BaseDate;
 import cn.bmob.otaku.number_z.view.MyListView;
 import cn.bmob.v3.Bmob;
 import cn.bmob.v3.listener.GetServerTimeListener;
@@ -79,14 +79,12 @@ public class CommentsAdapter extends BaseAdapter{
             viewHolder = (ViewHolder) convertView.getTag();
         }
 
-        ImageOptions options=new ImageOptions.Builder()
-                .setPlaceholderScaleType(ImageView.ScaleType.CENTER_CROP)
-                .setImageScaleType(ImageView.ScaleType.CENTER_CROP)
-                .setLoadingDrawableId(R.drawable.head)
-                .setFailureDrawableId(R.drawable.head)
-                .build();
-
-        x.image().bind(viewHolder.imageView, commentsBean.get(position).getUser().getImage().getFileUrl(context), options);
+        if (commentsBean.get(position).getUser().getImage()!=null)
+        {
+            x.image().bind(viewHolder.imageView, commentsBean.get(position).getUser().getImage().getFileUrl(context), BaseDate.Head_OPTIONS());
+        }else {
+            viewHolder.imageView.setImageResource(R.drawable.head);
+        }
 
         viewHolder.name.setText(commentsBean.get(position).getUser().getUsername());
 

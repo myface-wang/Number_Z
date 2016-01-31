@@ -7,7 +7,6 @@ import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,6 +24,7 @@ import cn.bmob.otaku.number_z.R;
 import cn.bmob.otaku.number_z.activity.MyApplication;
 import cn.bmob.otaku.number_z.adapter.CodeMeAdapter;
 import cn.bmob.otaku.number_z.utils.ErrorReport;
+import cn.bmob.otaku.number_z.utils.NoDoubleItemClickListener;
 import cn.bmob.otaku.number_z.window.CodeChooseMeActivity;
 import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.BmobUser;
@@ -79,10 +79,10 @@ public class CodeMeFragment extends Fragment{
 
         codeMeAdapter=new CodeMeAdapter(codeBeans,getActivity());
 
-        list_code.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        list_code.setOnItemClickListener(new NoDoubleItemClickListener() {
 
+            @Override
+            public void onNoDoubleItemClick(AdapterView<?> parent, View view, int position, long id) {
                 application.setHandler(handler);
                 Intent intent = new Intent(getActivity(), CodeChooseMeActivity.class);
                 intent.putExtra("code", codeBeans.get(position).getCode());
@@ -91,9 +91,8 @@ public class CodeMeFragment extends Fragment{
                 intent.putExtra("type", codeBeans.get(position).getType());
                 startActivity(intent);
                 codeidposition = position;
-
-                Log.i("position",position+"+"+codeBeans.get(position).getType());
             }
+
         });
 
         list_code.setAdapter(codeMeAdapter);

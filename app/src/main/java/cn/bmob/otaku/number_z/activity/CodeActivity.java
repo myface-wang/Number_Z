@@ -23,7 +23,6 @@ import cn.bmob.otaku.number_z.window.CodeTypeActivity;
  */
 public class CodeActivity extends BaseActivity{
 
-
     private ViewPager viewpager_code;
 
     @Override

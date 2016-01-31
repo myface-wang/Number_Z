@@ -3,6 +3,7 @@ package cn.bmob.otaku.number_z.adapter;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,11 +33,9 @@ public class CollectionAapter extends BaseAdapter {
     private Context context;
 
     public CollectionAapter(Context context, ArrayList<CollectionBean> commentBeans){
-
         this.context=context;
         this.commentBeans=commentBeans;
         layoutInflater = LayoutInflater.from(context);
-
     }
 
     @Override
@@ -70,16 +69,17 @@ public class CollectionAapter extends BaseAdapter {
 
         x.image().bind(holder.img, commentBeans.get(position).getDetails().getCover().getFileUrl(context));
 
-
         holder.textView.setText(ToDBC(commentBeans.get(position).getDetails().getName()));
 
-        holder.drawer_time.setText(commentBeans.get(position).getCreatedAt().substring(0,10));
+        holder.drawer_time.setText(commentBeans.get(position).getCreatedAt().substring(5,10));
 
         convertView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent();
-                intent.putExtra("objectid", commentBeans.get(position).getDetails().getObjectId());
+                Bundle bu = new Bundle();
+                bu.putSerializable("commentBean", commentBeans.get(position).getDetails());
+                intent.putExtras(bu);
                 intent.setClass(context, DetailsActivity.class);
                 context.startActivity(intent);
             }

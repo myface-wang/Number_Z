@@ -26,6 +26,7 @@ import java.util.LinkedList;
 
 import cn.bmob.otaku.number_z.Bean.CommentBean;
 import cn.bmob.otaku.number_z.R;
+import cn.bmob.otaku.number_z.utils.NoDoubleClickListener;
 import cn.bmob.otaku.number_z.utils.SysUtils;
 import cn.bmob.otaku.number_z.view.imagepager.PinchImageView;
 import cn.bmob.otaku.number_z.view.imagepager.PinchImageViewPager;
@@ -51,7 +52,7 @@ public class ImageActivity extends BaseActivity{
     int x2=0;
 
     private MyApplication myApplication;
-    private  WallpaperManager wallpaperManager;
+    private WallpaperManager wallpaperManager;
 
     public ImageActivity() {
     }
@@ -91,22 +92,21 @@ public class ImageActivity extends BaseActivity{
         page_id= (TextView) findViewById(R.id.page_id);
         page_frameLayout= (FrameLayout) findViewById(R.id.page_frameLayout);
 
-
         page_id.setText("1" + "/" + commentBeanList.size() + "");
 
-        load_image.setOnClickListener(new View.OnClickListener() {
+        load_image.setOnClickListener(new NoDoubleClickListener() {
             @Override
-            public void onClick(View v) {
-
+            public void onNoDoubleClick(View view) {
                 down(commentBeanList.get(flag).getUrl());
-
+                Toast.makeText(ImageActivity.this,"下载中...",Toast.LENGTH_LONG).show();
             }
         });
 
-        tv_wall.setOnClickListener(new View.OnClickListener() {
+        tv_wall.setOnClickListener(new NoDoubleClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onNoDoubleClick(View view) {
                 wall(commentBeanList.get(flag).getUrl());
+                Toast.makeText(ImageActivity.this,"正在设置...",Toast.LENGTH_LONG).show();
             }
         });
 
@@ -132,6 +132,7 @@ public class ImageActivity extends BaseActivity{
                 }
 
                 x.image().bind(piv, commentBeanList.get(position).getUrl(), myApplication.getOpt());
+                toolbar.setTitle(commentBeanList.get(position).getArtname());
                 container.addView(piv);
 
                 return piv;
@@ -178,6 +179,7 @@ public class ImageActivity extends BaseActivity{
                 BitmapDrawable bd = (BitmapDrawable) result;
                 try {
                     wallpaperManager.setBitmap(bd.getBitmap());
+                    Toast.makeText(ImageActivity.this,"设置成功",Toast.LENGTH_SHORT).show();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }

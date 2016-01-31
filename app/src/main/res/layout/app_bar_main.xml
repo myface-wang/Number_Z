@@ -52,6 +52,7 @@
                     android:id="@+id/list_main"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
+                    android:scrollbars="none"
                     android:divider="@null"
                     android:dividerHeight="10dp"
                     android:background="@color/white"
@@ -71,9 +72,9 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_margin"
-        android:src="@drawable/earth"
+        android:src="@drawable/key"
         app:backgroundTint="@color/Serenity"
-        app:rippleColor="@color/colorPrimary"
+        app:rippleColor="@color/color_bule2"
         />
 
 </android.support.design.widget.CoordinatorLayout>

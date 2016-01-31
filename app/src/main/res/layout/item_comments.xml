@@ -19,7 +19,6 @@
             android:scaleType="centerCrop"
             app:border_color="@color/white"
             app:border_width="1dp"
-            android:src="@drawable/head"
             />
 
 

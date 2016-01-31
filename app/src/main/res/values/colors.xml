@@ -30,4 +30,6 @@
     <color name="liang">#505a66</color>
     <color name="touming">#00000000</color>
     <color name="bantouming">#50000000</color>
+    <color name="yellow">#eb6100</color>
+    <color name="yellow_light">#f9ea38</color>
 </resources>

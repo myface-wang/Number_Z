@@ -14,6 +14,8 @@ import org.xutils.x;
 
 import cn.bmob.otaku.number_z.Bean.MyUser;
 import cn.bmob.otaku.number_z.R;
+import cn.bmob.otaku.number_z.utils.BaseDate;
+import cn.bmob.otaku.number_z.utils.NoDoubleClickListener;
 import cn.bmob.otaku.number_z.utils.Regular;
 import cn.bmob.otaku.number_z.view.CircleImageView;
 import cn.bmob.otaku.number_z.window.CameraActivity;
@@ -31,13 +33,11 @@ public class UpdateActivity extends BaseActivity{
     private EditText tv_username,tv_email;
     private CircleImageView image_head;
     private Button btn_update;
-    private MyApplication myApplication;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update);
-        myApplication= (MyApplication) getApplication();
         toolbar = (Toolbar) findViewById(R.id.toolbar_update);
         toolbar.setTitle("编辑资料");
         setSupportActionBar(toolbar);
@@ -59,24 +59,22 @@ public class UpdateActivity extends BaseActivity{
         btn_update= (Button) findViewById(R.id.btn_update);
 
         if (myUser.getImage()!=null){
-            x.image().bind(image_head,myUser.getImage().getFileUrl(this),myApplication.getOpt());
+            x.image().bind(image_head,myUser.getImage().getFileUrl(this), BaseDate.Head_OPTIONS());
         }
         tv_username.setText(myUser.getUsername());
         tv_email.setText(myUser.getEmail());
 
-        ll_headimage.setOnClickListener(new View.OnClickListener() {
+        ll_headimage.setOnClickListener(new NoDoubleClickListener() {
             @Override
-            public void onClick(View v) {
-
+            public void onNoDoubleClick(View view) {
                 Intent intent = new Intent(UpdateActivity.this, CameraActivity.class);
                 startActivityForResult(intent, 1);
-
             }
         });
 
-        btn_update.setOnClickListener(new View.OnClickListener() {
+        btn_update.setOnClickListener(new NoDoubleClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onNoDoubleClick(View view) {
                 String name=tv_username.getText().toString();
                 String email=tv_email.getText().toString();
 
@@ -131,7 +129,7 @@ public class UpdateActivity extends BaseActivity{
 
         if (data!=null)
         {
-            x.image().bind(image_head, data.getExtras().getString("url"), myApplication.getOpt());
+            x.image().bind(image_head, data.getExtras().getString("url"), BaseDate.Head_OPTIONS());
         }
         super.onActivityResult(requestCode, resultCode, data);
     }

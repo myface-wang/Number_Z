@@ -80,9 +80,9 @@ public class DetailsAdapter extends RecyclerView.Adapter<DetailsAdapter.ViewHold
                         // 图片缩放模式
                 .setImageScaleType(ImageView.ScaleType.CENTER_CROP)
                         // 下载中显示的图片
-                .setLoadingDrawableId(R.drawable.head)
+                .setLoadingDrawableId(R.drawable.load)
                         // 下载失败显示的图片
-                .setFailureDrawableId(R.drawable.head)
+//                .setFailureDrawableId(R.drawable.head)
                         // 得到ImageOptions对象
                 .build();
 

@@ -13,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.xutils.image.ImageOptions;
 import org.xutils.x;
 
 import java.util.ArrayList;
@@ -125,8 +126,14 @@ public class DetailsActivity extends BaseActivity implements View.OnClickListene
         commentsSize();
         collectioned();
 
+        ImageOptions options= new ImageOptions.Builder()
+                .setSize(-1,-1)
+                .setIgnoreGif(false)
+                .setImageScaleType(ImageView.ScaleType.CENTER_CROP)
+                .build();
+
         tv_title.setText(detailsBean.getName());
-        x.image().bind(head_details_image, detailsBean.getHeadimg().getFileUrl(DetailsActivity.this));
+        x.image().bind(head_details_image, detailsBean.getHeadimg().getFileUrl(DetailsActivity.this), options);
         commentBeanList.clear();
         commentBeanList.addAll(detailsBean.getContent());
         detailsAdapter.notifyDataSetChanged();

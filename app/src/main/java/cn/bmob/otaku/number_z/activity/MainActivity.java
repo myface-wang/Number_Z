@@ -39,6 +39,7 @@ import cn.bmob.otaku.number_z.Bean.MyUser;
 import cn.bmob.otaku.number_z.R;
 import cn.bmob.otaku.number_z.adapter.BannerAdapter;
 import cn.bmob.otaku.number_z.adapter.HomeAapter;
+import cn.bmob.otaku.number_z.utils.BaseDate;
 import cn.bmob.otaku.number_z.utils.ErrorReport;
 import cn.bmob.otaku.number_z.view.CircleImageView;
 import cn.bmob.otaku.number_z.view.rollviewpager.RollPagerView;
@@ -75,6 +76,7 @@ public class MainActivity extends BaseActivity
     private MyUser userInfo;
     private TextView tv_name,tv_createtime;
     private Button btn_register;
+    private FloatingActionButton fab;
 
     private MenuItem item;
     private long firstTime;
@@ -94,9 +96,9 @@ public class MainActivity extends BaseActivity
                         // 图片缩放模式
                 .setImageScaleType(ImageView.ScaleType.CENTER_CROP)
                         // 下载中显示的图片
-                .setLoadingDrawableId(R.drawable.loadimg)
+                .setLoadingDrawableId(R.drawable.head)
                         // 下载失败显示的图片
-                .setFailureDrawableId(R.drawable.loadimg)
+                .setFailureDrawableId(R.drawable.head)
                         // 得到ImageOptions对象
                 .build();
 
@@ -107,15 +109,15 @@ public class MainActivity extends BaseActivity
         setSupportActionBar(toolbar);
 
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", new View.OnClickListener() {
+                Snackbar.make(view,"消耗100积分开启", Snackbar.LENGTH_LONG)
+                        .setAction("确定", new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-
+                                fab.setImageResource(R.drawable.gift);
                                 Log.i("11", "11");
                             }
                         }).show();
@@ -197,13 +199,13 @@ public class MainActivity extends BaseActivity
             tv_createtime.setText("您注册了："+timeout(userInfo.getCreatedAt()));
             if (userInfo.getImage()!=null)
             {
-                x.image().bind(img_head, userInfo.getImage().getFileUrl(this), myApplication.getOpt());
+                x.image().bind(img_head, userInfo.getImage().getFileUrl(this), BaseDate.Head_OPTIONS());
             }
             tv_createtime.setVisibility(View.VISIBLE);
         }else {
             tv_name.setText("游客");
             tv_createtime.setText("登录体验更多功能哟~");
-            img_head.setImageResource(R.drawable.wlop);
+            img_head.setImageResource(R.drawable.head);
             btn_register.setVisibility(View.VISIBLE);
         }
 

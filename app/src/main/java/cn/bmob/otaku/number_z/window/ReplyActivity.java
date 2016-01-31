@@ -121,7 +121,7 @@ public class ReplyActivity extends Activity implements View.OnClickListener{
             @Override
             public void onSuccess() {
                 // TODO Auto-generated method stub
-                search(user.getObjectId(), user.getUsername());
+                search(userid, user.getUsername());
             }
 
             @Override

@@ -32,16 +32,26 @@
         android:orientation="vertical"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         >
-        <android.support.design.widget.TabLayout
-            android:id="@+id/tab_code"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:tabTextColor="@color/white"
-            app:tabSelectedTextColor="@android:color/holo_red_light"
-            app:tabIndicatorColor="@android:color/holo_red_light"
-            app:tabIndicatorHeight="2dp"
-            android:background="@color/Serenity"
-            />
+            android:orientation="vertical"
+            android:gravity="center"
+            android:paddingBottom="2dp"
+            >
+
+            <android.support.design.widget.TabLayout
+                android:id="@+id/tab_code"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:tabTextColor="@color/gray"
+                app:tabSelectedTextColor="@color/white"
+                app:tabIndicatorColor="@color/yellow_light"
+                app:tabIndicatorHeight="2dp"
+                android:background="@color/Serenity"
+                />
+
+        </LinearLayout>
 
         <android.support.v4.view.ViewPager
             android:id="@+id/viewpager_code"
