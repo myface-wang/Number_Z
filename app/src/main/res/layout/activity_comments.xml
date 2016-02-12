@@ -95,6 +95,7 @@
                     android:id="@+id/pinglun"
                     android:layout_width="55dp"
                     android:layout_height="35dp"
+                    android:textColor="@color/white"
                     android:text="发送"
                     android:background="@drawable/btnshape"
                     />

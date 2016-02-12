@@ -30,7 +30,6 @@ public class CodeActivity extends BaseActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_code);
 
-
         Toolbar toolbar= (Toolbar) findViewById(R.id.toolbar_code);
         toolbar.setTitle("代码仓库");
         setSupportActionBar(toolbar);

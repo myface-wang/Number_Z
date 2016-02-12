@@ -1,7 +1,6 @@
 package cn.bmob.otaku.number_z.activity;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.Toolbar;
@@ -106,12 +105,10 @@ public class CommentsActivity extends BaseActivity {
 
                 if (s.length()==0) {
                     pinglun.setBackgroundResource(R.drawable.btnshape);
-                    pinglun.setTextColor(Color.parseColor("#e5e5e5e5"));
                     btn=true;
                 }else if (btn)
                 {
                     pinglun.setBackgroundResource(R.drawable.btn_bule);
-                    pinglun.setTextColor(Color.parseColor("#535353"));
                     btn=false;
                 }
 

@@ -18,9 +18,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:paddingTop="10dp"
-            android:paddingRight="10dp"
-            android:paddingLeft="10dp"
+            android:paddingTop="5dp"
+            android:paddingRight="15dp"
+            android:paddingLeft="15dp"
             >
 
             <EditText
@@ -36,7 +36,6 @@
                 android:paddingTop="10dp"
                 android:lines="5"
                 android:hint="回复XXXXX："
-                android:layout_marginBottom="10dp"
                 />
 
 
@@ -44,7 +43,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:paddingBottom="10dp"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
                 >
 
                 <TextView
@@ -58,7 +58,7 @@
                     android:paddingBottom="5dp"
                     android:text="确定"
                     android:gravity="center"
-                    android:textColor="@color/black"
+                    android:textColor="@color/Serenity"
                     android:background="@drawable/item_click_bg_selector"
                     android:clickable="true"
                     />
@@ -75,7 +75,7 @@
                     android:layout_marginRight="10dp"
                     android:text="取消"
                     android:gravity="center"
-                    android:textColor="@color/black"
+                    android:textColor="@color/Serenity"
                     android:background="@drawable/item_click_bg_selector"
                     android:clickable="true"
                     />
