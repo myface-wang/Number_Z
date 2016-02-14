@@ -112,8 +112,8 @@ public class MainActivity extends BaseActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view,"消耗100积分开启", Snackbar.LENGTH_LONG)
-                        .setAction("确定", new View.OnClickListener() {
+                Snackbar.make(view,"积分系统建设中", Snackbar.LENGTH_LONG)
+                        .setAction("关闭", new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
                                 fab.setImageResource(R.drawable.gift);
@@ -175,9 +175,9 @@ public class MainActivity extends BaseActivity
         long betweenDays =endTime - beginTime;
 
         long day=betweenDays/(24*60*60*1000);
-        long hour=(betweenDays/(60*60*1000)-day*24);
-        long min=((betweenDays/(60*1000))-day*24*60-hour*60);
-        long s=(betweenDays/1000-day*24*60*60-hour*60*60-min*60);
+//        long hour=(betweenDays/(60*60*1000)-day*24);
+//        long min=((betweenDays/(60*1000))-day*24*60-hour*60);
+//        long s=(betweenDays/1000-day*24*60*60-hour*60*60-min*60);
 
         String date;
         if (day>0)
@@ -430,7 +430,8 @@ public class MainActivity extends BaseActivity
 
         //noinspection SimplifiableIfStatement
         if (id == 0) {
-
+            Intent intent=new Intent(this,MessageActivity.class);
+            startActivity(intent);
             return true;
         }
 

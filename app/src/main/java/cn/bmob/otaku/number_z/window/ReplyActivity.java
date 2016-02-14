@@ -21,6 +21,7 @@ import cn.bmob.otaku.number_z.Bean.DetailsBean;
 import cn.bmob.otaku.number_z.Bean.MyBmobInstallation;
 import cn.bmob.otaku.number_z.Bean.MyUser;
 import cn.bmob.otaku.number_z.Bean.PushBean;
+import cn.bmob.otaku.number_z.Bean.ReplyBean;
 import cn.bmob.otaku.number_z.R;
 import cn.bmob.otaku.number_z.utils.ErrorReport;
 import cn.bmob.otaku.number_z.utils.Regular;
@@ -108,11 +109,13 @@ public class ReplyActivity extends Activity implements View.OnClickListener{
 
         final MyUser user = BmobUser.getCurrentUser(this, MyUser.class);
 
+        final String content=ed_reply.getText().toString();
+
         DetailsBean detailsBean=new DetailsBean();
         detailsBean.setObjectId(value);
 
         final CommentsBean comment = new CommentsBean();
-        comment.setContent("回复"+name+":"+ed_reply.getText().toString());
+        comment.setContent("回复"+name+":"+content);
         comment.setUser(user);
         comment.setDetail(detailsBean);
 
@@ -121,7 +124,7 @@ public class ReplyActivity extends Activity implements View.OnClickListener{
             @Override
             public void onSuccess() {
                 // TODO Auto-generated method stub
-                search(userid, user.getUsername());
+                commit(user,content);
             }
 
             @Override
@@ -132,6 +135,35 @@ public class ReplyActivity extends Activity implements View.OnClickListener{
         });
 
     }
+
+    private void commit(final MyUser user,String content) {
+
+        MyUser myUser=new MyUser();
+        myUser.setObjectId(userid);
+
+        DetailsBean detailsBean=new DetailsBean();
+        detailsBean.setObjectId(value);
+
+        ReplyBean replyBean=new ReplyBean();
+        replyBean.setContent(content);
+        replyBean.setDetailsid(detailsBean);
+        replyBean.setReplyid(user);
+        replyBean.setUserid(myUser);
+        replyBean.setState(false);
+        replyBean.save(this, new SaveListener() {
+            @Override
+            public void onSuccess() {
+                search(userid, user.getUsername());
+            }
+
+            @Override
+            public void onFailure(int i, String s) {
+                ErrorReport.RrrorCode(i, ReplyActivity.this);
+            }
+        });
+
+    }
+
 
     private void search(final String objid, final String name){
 

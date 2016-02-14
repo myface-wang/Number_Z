@@ -47,7 +47,9 @@ public class SettingActivity extends BaseActivity{
     private void initview() {
 
         SharedPreferences share=getSharedPreferences("config", Context.MODE_PRIVATE);
-        final boolean flag= share.getBoolean("imageflag",true);
+        final SharedPreferences.Editor editor = share.edit();//获取编辑器
+        final boolean flag= share.getBoolean("imageflag", true);
+        boolean pushflag=share.getBoolean("pushflag",true);
 
         final SwitchView viewSwitch = (SwitchView) findViewById(R.id.sv_image);
         // 设置初始状态。true为开;false为关[默认]。set up original status. true for open and false for close[default]
@@ -76,18 +78,21 @@ public class SettingActivity extends BaseActivity{
 
 
         final SwitchView sv_push = (SwitchView) findViewById(R.id.sv_push);
-        sv_push.setOpened(flag);//写完后，注意这里的flag！！
+        sv_push.setOpened(pushflag);//写完后，注意这里的flag！！
         sv_push.setOnStateChangedListener(new SwitchView.OnStateChangedListener() {
             @Override
             public void toggleToOn(View view) {
                 sv_push.toggleSwitch(true);
-                Toast.makeText(SettingActivity.this, "建设中。。。", Toast.LENGTH_SHORT).show();
+
+                editor.putBoolean("pushflag", true);
+                editor.commit();
             }
 
             @Override
             public void toggleToOff(View view) {
                 sv_push.toggleSwitch(false);
-                Toast.makeText(SettingActivity.this, "建设中。。。", Toast.LENGTH_SHORT).show();
+                editor.putBoolean("pushflag", false);
+                editor.commit();
             }
         });
 
@@ -97,6 +102,7 @@ public class SettingActivity extends BaseActivity{
             @Override
             public void onClick(View v) {
                 x.image().clearCacheFiles();
+                Toast.makeText(SettingActivity.this,"清除完成！",Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -105,6 +111,7 @@ public class SettingActivity extends BaseActivity{
             @Override
             public void onClick(View v) {
                 BmobQuery.clearAllCachedResults(SettingActivity.this);
+                Toast.makeText(SettingActivity.this,"清除完成！",Toast.LENGTH_SHORT).show();
             }
         });
     }

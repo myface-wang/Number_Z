@@ -41,6 +41,7 @@
             >
 
             <ImageView
+                android:id="@+id/app_img"
                 android:paddingTop="30dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -63,15 +64,29 @@
                 android:paddingTop="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="版本号"
                 />
 
             <TextView
                 android:id="@+id/tv_context"
-                android:paddingTop="30dp"
-                android:layout_width="match_parent"
+                android:layout_marginTop="30dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text=""
+                android:text="应用内资源均来自网络"
+                android:padding="5dp"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="如有侵权,联系我们"
+                android:padding="5dp"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:text="邮箱：2086444984@qq.com"
                 />
 
         </LinearLayout>

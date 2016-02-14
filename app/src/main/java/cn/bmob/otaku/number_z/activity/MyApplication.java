@@ -106,6 +106,7 @@ public class MyApplication extends Application {
         SharedPreferences sharedPreferences = getSharedPreferences("config", Context.MODE_PRIVATE); //私有数据
         SharedPreferences.Editor editor = sharedPreferences.edit();//获取编辑器
         editor.putBoolean("imageflag",flag);
+        editor.putBoolean("pushflag",true);
         editor.commit();//提交修改
     }
 

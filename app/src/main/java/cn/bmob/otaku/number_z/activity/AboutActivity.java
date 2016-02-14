@@ -5,6 +5,7 @@ import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import cn.bmob.otaku.number_z.R;
@@ -15,6 +16,7 @@ import cn.bmob.otaku.number_z.R;
 public class AboutActivity extends BaseActivity{
 
     private TextView tv_context,tv_vsersion;
+    private ImageView app_img;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,11 +35,15 @@ public class AboutActivity extends BaseActivity{
     }
 
     private void initview() {
-        String text2="我们不生产水,我们是大自然的搬运工。所有资源均来自网络，如有侵权请及时联系我们，审核后进行相关删除。邮箱xxxx@qq.com";
+//        String text2="我们不生产水,我们是大自然的搬运工。所有资源均来自网络，如有侵权请及时联系我们，审核后进行相关删除。邮箱xxxx@qq.com";
         tv_context= (TextView) findViewById(R.id.tv_context);
         tv_vsersion= (TextView) findViewById(R.id.tv_vsersion);
+
+        app_img= (ImageView) findViewById(R.id.app_img);
+        app_img.setImageResource(R.mipmap.ic_launcher);
+
         tv_vsersion.setText("版本号："+getVersionName());
-        tv_context.setText(text2);
+//        tv_context.setText(text2);
     }
 
     private String getVersionName()

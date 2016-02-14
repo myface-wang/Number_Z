@@ -160,6 +160,7 @@ public class CodeMeFragment extends Fragment{
 
     private void initdata() {
 
+        isLoading = true;
         MyUser user = BmobUser.getCurrentUser(getActivity(), MyUser.class);
         BmobQuery<CodeBean> query = new BmobQuery<CodeBean>();
         query.addWhereEqualTo("user", user);
@@ -174,13 +175,14 @@ public class CodeMeFragment extends Fragment{
                 codeBeans.addAll(list);
                 codeMeAdapter.notifyDataSetChanged();
                 swipeLayout.setRefreshing(false);
-
+                isLoading = false;
             }
 
             @Override
             public void onError(int i, String s) {
                 ErrorReport.RrrorCode(i,getActivity());
                 swipeLayout.setRefreshing(false);
+                isLoading = false;
             }
         });
 

@@ -23,7 +23,8 @@
 
     <color name="line">#E8E8E7</color>
     <color name="color_background">#23272C</color>
-    <color name="gray">#e5e5e5e5</color>
+    <color name="gray">#e5e5e5</color>
+    <color name="huise">#D0D0D0</color>
     <color name="black">#535353</color>
     <color name="white">#fafafa</color>
     <color name="item">#2e343b</color>

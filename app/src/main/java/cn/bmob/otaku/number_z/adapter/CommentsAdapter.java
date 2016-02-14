@@ -6,7 +6,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import org.xutils.x;
@@ -18,7 +17,6 @@ import java.util.ArrayList;
 import cn.bmob.otaku.number_z.Bean.CommentsBean;
 import cn.bmob.otaku.number_z.R;
 import cn.bmob.otaku.number_z.utils.BaseDate;
-import cn.bmob.otaku.number_z.view.MyListView;
 import cn.bmob.v3.Bmob;
 import cn.bmob.v3.listener.GetServerTimeListener;
 
@@ -73,7 +71,7 @@ public class CommentsAdapter extends BaseAdapter{
             viewHolder.time= (TextView) convertView.findViewById(R.id.comment_time);
             viewHolder.content= (TextView) convertView.findViewById(R.id.comment_content);
 //            viewHolder.listview_reply= (MyListView) convertView.findViewById(R.id.listview_reply);
-            viewHolder.addview= (LinearLayout) convertView.findViewById(R.id.addview);
+//            viewHolder.addview= (LinearLayout) convertView.findViewById(R.id.addview);
             convertView.setTag(viewHolder);
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
@@ -101,8 +99,8 @@ public class CommentsAdapter extends BaseAdapter{
         private TextView name;
         private TextView time;
         private TextView content;
-        private MyListView listview_reply;
-        private LinearLayout addview;
+//        private MyListView listview_reply;
+//        private LinearLayout addview;
     }
 
     private String timeout(String linktime){
