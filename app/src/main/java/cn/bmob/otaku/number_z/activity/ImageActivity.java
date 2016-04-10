@@ -74,6 +74,7 @@ public class ImageActivity extends BaseActivity{
         commentBeanList.clear();
 //        commentBeanList=getIntent().getParcelableArrayListExtra("list");
         commentBeanList= (ArrayList<CommentBean>) getIntent().getExtras().getSerializable("list");
+
         id=getIntent().getExtras().getInt("id", 0);
 
         wallpaperManager = WallpaperManager.getInstance(this);
@@ -272,7 +273,6 @@ public class ImageActivity extends BaseActivity{
 
             @Override
             public void onCancelled(CancelledException cex) {
-
             }
 
             @Override

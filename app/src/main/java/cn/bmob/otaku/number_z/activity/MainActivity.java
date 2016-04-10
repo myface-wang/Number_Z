@@ -293,7 +293,7 @@ public class MainActivity extends BaseActivity
             public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
 
                 if (list != null && list.getChildCount() > 0) {
-                    boolean enable = (firstVisibleItem == 0) && (view.getChildAt(firstVisibleItem).getTop() == 0);
+                    boolean enable = firstVisibleItem == 0 && view.getChildAt(firstVisibleItem).getTop() == 0;
                     swipeLayout.setEnabled(enable);
 
                     if (firstVisibleItem + visibleItemCount == totalItemCount && !isLoading && totalItemCount >= (page + 1)) {
@@ -406,9 +406,7 @@ public class MainActivity extends BaseActivity
                 isLoading = false;
             }
         });
-
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

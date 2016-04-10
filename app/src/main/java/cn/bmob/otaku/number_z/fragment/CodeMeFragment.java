@@ -57,6 +57,7 @@ public class CodeMeFragment extends Fragment{
 
         view=inflater.inflate(R.layout.fragment_code_me, container, false);
 
+
         application= (MyApplication) getActivity().getApplication();
 
         handler=new Myhandler();
